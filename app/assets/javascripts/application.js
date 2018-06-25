@@ -16,3 +16,4 @@
 //= require jquery
 //= require bootstrap-sprockets
 //= require_tree .
+config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
