@@ -25,7 +25,7 @@ gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 
-gem 'ckeditor', '4.2.4'
+gem 'ckeditor'
 gem 'carrierwave'
 gem 'mini_magick'
 
