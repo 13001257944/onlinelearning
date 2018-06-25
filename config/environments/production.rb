@@ -28,7 +28,7 @@ Rails.application.configure do
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
  
-  config.assets.compile = true # we don't want compilation fallbacks
+  config.assets.compile = false # we don't want compilation fallbacks
   config.assets.precompile += Ckeditor.assets
   config.assets.precompile += %w(ckeditor/* )
   config.autoload_paths += %W(#{config.root}/app/models/ckeditor)
