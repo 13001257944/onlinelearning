@@ -6,6 +6,7 @@ Ckeditor.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require "ckeditor/orm/active_record"
+  config.parent_controller = "Admin::ApplicationController"
   # Allowed image file types for upload.
   # Set to nil or [] (empty array) for all file types
   # By default: %w(jpg jpeg png gif tiff)
@@ -18,7 +19,7 @@ Ckeditor.setup do |config|
 
   # Setup authorization to be run as a before filter
   # By default: there is no authorization.
-  config.authorize_with :cancan
+  # config.authorize_with :cancan
 
   # Asset model classes
   # config.picture_model { Ckeditor::Picture }
