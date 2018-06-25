@@ -1,0 +1,16 @@
+<div class="form container">
+  <div class="row">
+   <%= form_for [@course, @coursetextbook] do |f| %>
+    <div class="form-group">
+      Title:<%= f.text_area :title, placeholder: "主題", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      教材內容:<br><%= f.cktext_area :body, placeholder: "教材內容", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+    </div>
+  <% end %>
+  </div>
+</div>

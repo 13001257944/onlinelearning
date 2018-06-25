@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @course.name %>
+</p>
+
+<p>
+  <strong>Photo:</strong>
+  <%= image_tag @course.photo.url %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= simple_format(@course.description) %>
+</p>
+
+
+<% if current_user.id == @course.user_id %>
+  <%= link_to '編輯課程', edit_course_path(@course) %> |
+<% end %>
+<%= link_to '返回', courses_path %>
+<%= link_to '進入課程教材', course_coursetextbooks_path(@course) %>
+
