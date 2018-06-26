@@ -7,7 +7,7 @@
 
 <p>
   <strong>Photo:</strong>
-  <%= image_tag @course.photo.url %>
+  <%= image_tag @course.photo.url , width: '300px' if @rcourse.photo?%>
 </p>
 
 <p>
