@@ -1,8 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Title:</strong>
-  <%= @coursetextbook.title %>
+  <h1><strong><%= @coursetextbook.title %></strong></h1>
 </p>
 
 <p>
@@ -11,9 +10,12 @@
 </p>
 
 <p>
-  <strong>Body:</strong><br>
   <%=raw @coursetextbook.body %>
 </p>
+<% if @coursetextbook.code == "Ruby" %>
+  <p><iframe allowfullscreen="true" allowtransparency="true" frameborder="no" height="400px" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" scrolling="no" src="https://repl.it/@z1z1z1joey/TurbulentGentleGraph?lite=true" width="100%"></iframe></p>
+<% end %>
+
 
 
 
@@ -50,3 +52,4 @@
   <% end %>
   </div>
 </div>
+

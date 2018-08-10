@@ -2,27 +2,24 @@
 
 <h1>Coursetextbooks</h1>
 
-<table>
-  <thead>
     <tr>
       <th>課程單元</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
 
-  <tbody>
+    <% i=0 %>
     <% @course.coursetextbooks.each do |coursetextbook| %>
-      <tr>
-        <td><%= coursetextbook.title %></td>
-        <td><%= link_to '進入教材', course_coursetextbook_path(@course,coursetextbook)  %></td>
-        <% if current_user.id == @course.user_id %>
-          <td><%= link_to '編輯教材', edit_course_coursetextbook_path(@course,coursetextbook) %></td>
-          <td><%= link_to "刪除教材", course_coursetextbook_path(@course, coursetextbook), method: :delete , data: { confirm: 'Are you sure?' }%></td>
-        <% end %>
-      </tr>
+        <% i=i+1 %>
+        <div class="ui segment">
+          <td>Lesson <%=i%> : <%= link_to coursetextbook.title, course_coursetextbook_path(@course,coursetextbook)  %></td>
+          <% if current_user.id == @course.user_id %>
+            <td><%= link_to '編輯教材', edit_course_coursetextbook_path(@course,coursetextbook) %></td>
+            <td><%= link_to "刪除教材", course_coursetextbook_path(@course, coursetextbook), method: :delete , data: { confirm: 'Are you sure?' }%></td>
+           <% end %>
+        </div>
+       
     <% end %>
-  </tbody>
-</table>
+ 
 
 <br>
 <% if current_user.id == @course.user_id %>

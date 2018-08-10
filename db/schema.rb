@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419023120) do
+ActiveRecord::Schema.define(version: 20180810054833) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -50,6 +50,7 @@ ActiveRecord::Schema.define(version: 20180419023120) do
     t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "code"
   end
 
   create_table "courseusers", force: :cascade do |t|
@@ -73,6 +74,12 @@ ActiveRecord::Schema.define(version: 20180419023120) do
     t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "birthday"
+    t.string "college"
+    t.string "sex"
+    t.string "ror"
+    t.string "programming"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

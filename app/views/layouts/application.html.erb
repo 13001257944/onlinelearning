@@ -7,23 +7,362 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <style type="text/css">
+    body {
+      background-color: #FAFAFA;
+    }
+    body > .grid {
+      height: 100%;
+    }
+    .image {
+      margin-top: -100px;
+    }
+    .column {
+      max-width: 450px;
+    }
+  </style>
+  <script>
+  $(document)
+    .ready(function() {
+      $('.special.card .image').dimmer({
+        on: 'hover'
+      });
+      $('.star.rating')
+        .rating()
+      ;
+      $('.card .dimmer')
+        .dimmer({
+          on: 'hover'
+        })
+      ;
+      $('.ui.form')
+        .form({
+          fields: {
+            email: {
+              identifier  : 'email',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your e-mail'
+                },
+                {
+                  type   : 'email',
+                  prompt : 'Please enter a valid e-mail'
+                }
+              ]
+            },
+            password: {
+              identifier  : 'password',
+              rules: [
+                {
+                  type   : 'empty',
+                  prompt : 'Please enter your password'
+                },
+                {
+                  type   : 'length[6]',
+                  prompt : 'Your password must be at least 6 characters'
+                }
+              ]
+            }
+          }
+        })
+      ;
+    })
+  ;
+  </script>
+  <style type="text/css">
+
+    .hidden.menu {
+      display: none;
+    }
+
+    .masthead.segment {
+      min-height: 700px;
+      padding: 1em 0em;
+    }
+    .masthead .logo.item img {
+      margin-right: 1em;
+    }
+    .masthead .ui.menu .ui.button {
+      margin-left: 0.5em;
+    }
+    .masthead h1.ui.header {
+      margin-top: 3em;
+      margin-bottom: 0em;
+      font-size: 4em;
+      font-weight: normal;
+    }
+    .masthead h2 {
+      font-size: 1.7em;
+      font-weight: normal;
+    }
+
+    .ui.vertical.stripe {
+      padding: 8em 0em;
+    }
+    .ui.vertical.stripe h3 {
+      font-size: 2em;
+    }
+    .ui.vertical.stripe .button + h3,
+    .ui.vertical.stripe p + h3 {
+      margin-top: 3em;
+    }
+    .ui.vertical.stripe .floated.image {
+      clear: both;
+    }
+    .ui.vertical.stripe p {
+      font-size: 1.33em;
+    }
+    .ui.vertical.stripe .horizontal.divider {
+      margin: 3em 0em;
+    }
+
+    .quote.stripe.segment {
+      padding: 0em;
+    }
+    .quote.stripe.segment .grid .column {
+      padding-top: 5em;
+      padding-bottom: 5em;
+    }
+
+    .footer.segment {
+      padding: 5em 0em;
+    }
+
+    .secondary.pointing.menu .toc.item {
+      display: none;
+    }
+
+    @media only screen and (max-width: 700px) {
+      .ui.fixed.menu {
+        display: none !important;
+      }
+      .secondary.pointing.menu .item,
+      .secondary.pointing.menu .menu {
+        display: none;
+      }
+      .secondary.pointing.menu .toc.item {
+        display: block;
+      }
+      .masthead.segment {
+        min-height: 350px;
+      }
+      .masthead h1.ui.header {
+        font-size: 2em;
+        margin-top: 1.5em;
+      }
+      .masthead h2 {
+        margin-top: 0.5em;
+        font-size: 1.5em;
+      }
+    }
+
+
+  </style>
+  <script>
+  $(document)
+    .ready(function() {
+
+      // fix menu when passed
+      $('.masthead')
+        .visibility({
+          once: false,
+          onBottomPassed: function() {
+            $('.fixed.menu').transition('fade in');
+          },
+          onBottomPassedReverse: function() {
+            $('.fixed.menu').transition('fade out');
+          }
+        })
+      ;
+
+      // create sidebar and attach to menu open
+      $('.ui.sidebar')
+        .sidebar('attach events', '.toc.item')
+      ;
+
+    })
+  ;
+  </script>
 
   </head>
 
 
 
-  <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+  <body >
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-4">.</div>
+          <div class="col-md-4" style="text-align:center;">
+            <% if current_user %>
+              Hi, <%= current_user.email %>
+                <%= link_to('登出', destroy_user_session_path, method: :delete) %> |
+                <%= link_to('修改密碼', edit_user_registration_path) %>
+              <% else %>
+                <%= link_to('註冊', new_user_registration_path) %> |
+                <%= link_to('登入', new_user_session_path) %>
+             <% end %>
+          </div>
+        <div class="col-md-4"></div>
+      </div>
+    </div>
 
-     <% if current_user %>
-      Hi, <%= current_user.email %>
-        <%= link_to('登出', destroy_user_session_path, method: :delete) %> |
-        <%= link_to('修改密碼', edit_user_registration_path) %>
+    
+
+<div class="ui large top fixed menu transition hidden">
+  <div class="ui container">
+    <a class="navbar-brand" href="/courses">程式教學平台</a>
+    <a class="active item">課程瀏覽</a>
+    <a class="item">師資陣容</a>
+    <a class="item">起源</a>
+    <a class="item">學習報導</a>
+    <div class="right menu">
+      <% if current_user %>
+        <div class="item">
+          Hi, <%= current_user.name %>
+        </div>
+        <div class="item">
+          <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 
+        </div>
+        <div class="item">
+           <%= link_to('修改密碼', edit_user_registration_path, :class=>"ui button") %>
+        </div>
       <% else %>
-        <%= link_to('註冊', new_user_registration_path) %> |
-        <%= link_to('登入', new_user_session_path) %>
-     <% end %>
+        <div class="item">
+          <%= link_to('註冊', new_user_registration_path, :class=>"ui primary button") %>
+        </div>
+        <div class="item">
+           <%= link_to('登入', new_user_session_path, :class=>"ui button") %>
+        </div>                
+      <% end %>
+      
+      <!-- <div class="item">
+        <a class="ui button">Log in</a>
+      </div>
+      <div class="item">
+        <a class="ui primary button">Sign Up</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+<!-- Sidebar Menu -->
+<div class="ui vertical inverted sidebar menu left">
+  <a class="navbar-brand" href="/courses">程式教學平台</a>
+  <a class="active item">課程瀏覽</a>
+  <a class="item">師資陣容</a>
+  <a class="item">起源</a>   
+  <a class="item">學習報導</a>
+  <% if current_user %>
+    <div class="item">
+      Hi, <%= current_user.sex %>
+    </div>
+    <div class="item">
+      <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 
+    </div>
+    <div class="item">
+       <%= link_to('修改密碼', edit_user_registration_path, :class=>"ui button") %>
+    </div>
+  <% else %>
+    <div class="item">
+      <%= link_to('註冊', new_user_registration_path, :class=>"ui primary button") %>
+    </div>
+    <div class="item">
+       <%= link_to('登入', new_user_session_path, :class=>"ui button") %>
+    </div>                
+  <% end %>
+  
+</div>
+
+
+<!-- Page Contents -->
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+    <div class="ui container">
+      <div class="ui large secondary inverted pointing menu">
+        <a class="toc item">
+          <i class="sidebar icon"></i>
+        </a>
+        <a class="header item" href="/courses">程式教學平台</a>
+        <a class="active item">課程瀏覽</a>
+        <a class="item">師資陣容</a>
+        <a class="item">起源</a>
+        <a class="item">學習報導</a>
+        <div class="right item">
+          <% if current_user %>
+            <div class="item">
+              Hi, <%= current_user.sex %>
+            </div>
+            <div class="item">
+              <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui inverted button") %> 
+            </div>
+            <div class="item">
+               <%= link_to('修改密碼', edit_user_registration_path, :class=>"ui inverted button") %>
+            </div>
+          <% else %>
+            <div class="item">
+              <%= link_to('註冊', new_user_registration_path, :class=>"ui inverted button") %>
+            </div>
+            <div class="item">
+               <%= link_to('登入', new_user_session_path, :class=>"ui inverted button") %>
+            </div>                
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui text container">
+      <h1 class="ui inverted header">
+        Imagine-Your-World.
+      </h1>
+      <h2>Do whatever it takes.拼盡全力</h2>
+      <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+    </div>
+
+
+  </div>
+  
+
+  <div class="ui vertical stripe segment container">
     <%= yield %>
-  </body>
+  </div>
+ 
+
+  <div class="ui inverted vertical footer segment">
+    <div class="ui container">
+      <div class="ui stackable inverted divided equal height stackable grid">
+        <div class="three wide column">
+          <h4 class="ui inverted header">About</h4>
+          <div class="ui inverted link list">
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">Sitemap</a>
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">Contact Us</a>
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">Religious Ceremonies</a>
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">Gazebo Plans</a>
+          </div>
+        </div>
+        <div class="three wide column">
+          <h4 class="ui inverted header">Services</h4>
+          <div class="ui inverted link list">
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">Banana Pre-Order</a>
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">DNA FAQ</a>
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">How To Access</a>
+            <a href="https://semantic-ui.com/examples/homepage.html#" class="item">Favorite X-Men</a>
+          </div>
+        </div>
+        <div class="seven wide column">
+          <h4 class="ui inverted header">Footer Header</h4>
+          <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+  
+
+
+</body>
+  
 </html>

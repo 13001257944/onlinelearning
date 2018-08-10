@@ -1,29 +1,151 @@
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<body class="bg-light">
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <div class="container">
+      <div class="py-5 text-center">
+        <img class="d-block mx-auto mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h2>註冊 Sign up | 登入<%= render "devise/shared/links" %> </h2>
+        <p class="lead">請依照真實情況填寫個人基本資料。</p>
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= devise_error_messages! %>
+        <div class="row">
+          <div class="col-md-8 order-md-1">
+            <h4 class="mb-3">基本資料</h4>
+            <form class="needs-validation" novalidate>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="firstName">姓名</label>
+                  <%= f.text_field :name, autofocus: true ,:class=>"form-control" , :required => true %>
+                  <div class="invalid-feedback">
+                    Valid name is required.
+                  </div>
+                </div>
+              </div>
+              <br> 
+              <div class="mb-3">
+                <label for="email">Email</label>
+                <%= f.email_field :email, autofocus: true ,:class=>"form-control", :placeholder=>"you@example.com", :required => true%>
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+              <br>
+              <div class="mb-3">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br />
+                <%= f.password_field :password, autocomplete: "off", :class=>"form-control",:id =>"password" %>
+                <div class="invalid-feedback">
+                  Please enter a valid email address for shipping updates.
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <label for="sex">性別</label>
+                  <%= f.select :sex,options_for_select([["男生",1],["女生",0],["其他",2]],1),:class=>"custom-select d-block w-100" %>
+                  <div class="invalid-feedback">
+                    Please select a valid sex.
+                  </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                  <label for="birthday">生日</label>
+                  <%= f.text_field :birthday, autofocus: true ,:class=>"form-control datepicker" , :required => true ,:data => {:provide => "datepicker"}%>
+                  <!-- <input type="text" data-provide='datepicker' class="form-control" required> -->
+                  <div class="invalid-feedback">
+                    Please provide a valid date.
+                  </div>
+                </div>                
+              </div>
+              <!-- <hr class="mb-4">
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="same-address">
+                <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+              </div>
+              <div class="custom-control custom-checkbox">
+                <input type="checkbox" class="custom-control-input" id="save-info">
+                <label class="custom-control-label" for="save-info">Save this information for next time</label>
+              </div> -->
+              <hr class="mb-4">
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="college">畢業學校</label>
+                  <%= f.text_field :college, autofocus: true ,:class=>"form-control" , :required => true %>
+                  <small class="text-muted">Full name as displayed on card</small>
+                  <div class="invalid-feedback">
+                    Name on card is required
+                  </div>
+                </div>
+              </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+              <h4 class="mb-3">是否曾經接觸過程式語言</h4>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+              <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                  <%= f.radio_button :programming, "programming" ,:class=>"custom-control-input" ,:checked =>true,:required => true%>
+                  <%= f.label :programming, "是" %>
+                </div>
+                <div class="custom-control custom-radio">
+                  <%= f.radio_button :programming, "programming" ,:class=>"custom-control-input" ,:checked =>false,:required => true%>
+                  <%= f.label :programming, "否" %>
+                </div>
+              </div>
+              <h4 class="mb-3">是否曾經接觸過Ruby on Rails</h4>
+              <div class="d-block my-3">
+                <div class="custom-control custom-radio">
+                  <%= f.radio_button :ror, "programming" ,:class=>"custom-control-input" ,:checked =>false,:required => true%>
+                  <%= f.label :ror, "是" %>
+                </div>
+                <div class="custom-control custom-radio">
+                  <%= f.radio_button :ror, "programming" ,:class=>"custom-control-input" ,:checked =>true,:required => true%>
+                  <%= f.label :ror, "否" %>
+                </div>
+              </div>
+              
+              <hr class="mb-4">
+              <%= f.submit '送出' ,:class =>"btn btn-primary btn-lg btn-block" %>
+            </form>
+          </div>
+        </div>
 
-<%= render "devise/shared/links" %>
+        <footer class="my-5 pt-5 text-muted text-center text-small">
+          <p class="mb-1">&copy; 2018 SMIS Lab</p>
+        </footer>
+      </div>
+    <% end %>
+
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="../../../../assets/js/vendor/popper.min.js"></script>
+    <script src="../../../../dist/js/bootstrap.min.js"></script>
+    <script src="../../../../assets/js/vendor/holder.min.js"></script>
+    <script>
+      // Example starter JavaScript for disabling form submissions if there are invalid fields
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // Fetch all the forms we want to apply custom Bootstrap validation styles to
+          var forms = document.getElementsByClassName('needs-validation');
+
+          // Loop over them and prevent submission
+          var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+    </script>

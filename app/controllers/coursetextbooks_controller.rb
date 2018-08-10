@@ -51,7 +51,7 @@ class CoursetextbooksController < ApplicationController
     @coursetextbook = Coursetextbook.find(params[:id])
   end
   def coursetextbook_params
-    params.require(:coursetextbook).permit(:title, :body)
+    params.require(:coursetextbook).permit(:title, :body, :code)
   end
   
 

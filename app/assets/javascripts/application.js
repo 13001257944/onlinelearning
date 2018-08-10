@@ -15,4 +15,8 @@
 //= require ckeditor/init
 //= require jquery
 //= require bootstrap-sprockets
+//= require bootstrap-datepicker
+//= require semantic-ui
+//= require semantic-ui/modal
+//= require semantic-ui/dropdown
 //= require_tree .
