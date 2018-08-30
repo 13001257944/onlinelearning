@@ -1,0 +1,19 @@
+<div class="form container">
+  <div class="row">
+   <%= form_for [@course, @homework] do |f| %>
+    <div class="form-group">
+      題目:<%= f.text_area :name, placeholder: "主題", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      範例檔案：<%= f.file_field :file , class: "form-control" %>
+    </div>
+    <div class="form-group">
+      說明:<br><%= f.text_area :description, placeholder: "教材內容", class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+    </div>
+  <% end %>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+<% if course.is_courseregisted?(current_user) %>
+  <td><%= link_to '進入課程', course_coursetextbooks_path(course) , :class => 'ui button' %></td> 
+  <td><%= link_to '退課',uncourseregistion_course_path(course), method: :post ,  :class => 'yellow ui button' %></td>
+<% elsif current_user.id == course.user_id %>
+  <td><%= link_to '進入課程', course_coursetextbooks_path(course) , :class => 'ui button' %></td>
+  <td><%= link_to '編輯', edit_course_path(course), :class => 'teal ui button' %></td>
+  <td><%= link_to '', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>  
+<% else %> 
+  <td><%= link_to '課程簡介', course_path(course) , :class => 'ui button' %></td>        
+  <td><%= link_to '註冊',courseregistion_course_path(course), method: :post ,  :class => 'yellow ui button' %></td>
+<% end %>

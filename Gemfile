@@ -34,6 +34,7 @@ gem 'jquery-rails'
 gem 'semantic-ui-sass'
 
 gem 'bootstrap-datepicker-rails'
+gem "paperclip", "~> 6.0.0"
 
 
 # Use Redis adapter to run Action Cable in production

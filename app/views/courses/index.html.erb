@@ -33,13 +33,7 @@
         </div>
       </div>
       <div class="extra content">
-        <%= link_to '進入課程', course_coursetextbooks_path(course) , :class => 'ui button' %>
-        <% if current_user.id == course.user_id %>
-          <td><%= link_to '編輯', edit_course_path(course), :class => 'teal ui button' %></td>
-          <td><%= link_to '', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% else %>
-          <td><%= link_to '註冊', :class => 'yellow ui button' %></td>
-        <% end %>
+        <%= render partial: "shared/courseregistion", locals: {course: course} %>          
       </div>
     </div>
     <br>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180810054833) do
+ActiveRecord::Schema.define(version: 20180830070250) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -31,6 +31,13 @@ ActiveRecord::Schema.define(version: 20180810054833) do
     t.text "content"
     t.integer "coursetextbook_id"
     t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courseregistions", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,6 +63,35 @@ ActiveRecord::Schema.define(version: 20180810054833) do
   create_table "courseusers", force: :cascade do |t|
     t.integer "user_id"
     t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "homeworks", force: :cascade do |t|
+    t.string "name"
+    t.string "file"
+    t.text "description"
+    t.integer "course_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "fileload_file_name"
+    t.string "fileload_content_type"
+    t.integer "fileload_file_size"
+    t.datetime "fileload_updated_at"
+  end
+
+  create_table "registrations", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "course_id"
+    t.datetime "registration_date"
+    t.index ["course_id"], name: "index_registrations_on_course_id"
+    t.index ["user_id"], name: "index_registrations_on_user_id"
+  end
+
+  create_table "studenthomeworks", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "homework_id"
+    t.string "file"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

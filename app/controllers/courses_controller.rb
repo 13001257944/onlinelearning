@@ -1,4 +1,5 @@
 class CoursesController < ApplicationController
+  layout "index"
   before_action :authenticate_user!
   before_action :set_course, only: [:show, :edit, :update, :destroy]
 
@@ -38,6 +39,7 @@ class CoursesController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /courses/1
   # PATCH/PUT /courses/1.json
   def update
@@ -62,6 +64,21 @@ class CoursesController < ApplicationController
     end
   end
 
+  def courseregistion
+    @course = Course.find(params[:id])
+    @course.courseregistions.create!(user: current_user)
+    redirect_back(fallback_location: root_path)  # 導回上一頁
+  end
+
+  def uncourseregistion
+    @course = Course.find(params[:id])
+    courseregistions = Courseregistion.where(course: @course, user: current_user)
+    courseregistions.destroy_all
+    redirect_back(fallback_location: root_path)
+  end
+
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
@@ -72,4 +89,9 @@ class CoursesController < ApplicationController
     def course_params
       params.require(:course).permit(:name, :photo, :description, :user_id)
     end
+
+    
+
+    
+
 end
