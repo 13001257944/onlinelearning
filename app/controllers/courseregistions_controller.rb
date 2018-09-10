@@ -8,7 +8,8 @@ class CourseregistionsController < ApplicationController
     @courseregistion = @course.courseregistions.build(course_id: params[:course_id])
     @courseregistion.user = current_user
     @courseregistion.save!
-    redirect_to course_path(@course)
+    redirect_to course_courseregistion_path(@course,@courseregistion)
+
   end
 
   def destroy

@@ -20,8 +20,6 @@
 <% if current_user.id == @course.user_id %>
   <%= link_to '編輯課程', edit_course_path(@course) %> |
   <%= link_to '進入課程教材', course_coursetextbooks_path(@course) %>
-<% else%>
-  <%= link_to '註冊',courseregistion_course_path(@course), method: :post ,  :class => 'yellow ui button' , data: { confirm: '確定要註冊？' }%>
 <% end %>
 <%= link_to '返回', courses_path %>
 
