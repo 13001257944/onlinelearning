@@ -1,0 +1,19 @@
+<% if current_user.id == studenthomework.user_id %>  
+  <div class="comment">
+    <div class="content">
+      <a class="author"><%= studenthomework.user.name %></a>
+      <div class="metadata">
+        <span class="date"><%= studenthomework.created_at %></span>
+      </div>
+      <div class="text">
+        <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+
+      </div>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <%= link_to "Delete", course_homework_studenthomework_path(@course,@homework, studenthomework) ,method: :delete , data: { confirm: 'Are you sure?' }, :remote => true %>
+  </div>
+  <hr>
+<% end %>

@@ -23,30 +23,20 @@
 
 <div class="ui comments">
   <h3 class="ui dividing header">作業繳交</h3>
-  <% @homework.studenthomeworks.each do |studenthomework| %>
-    <% if current_user.id == studenthomework.user_id %>  
-      <div class="comment">
-        <div class="content">
-          <a class="author"><%= studenthomework.user.name %></a>
-          <div class="metadata">
-            <span class="date"><%= studenthomework.created_at %></span>
+  <div>
+    <div id="studenthomeworklist">
+      <% @homework.studenthomeworks.each do |studenthomework| %>   
+          <div id="studenthomework-<%= studenthomework.id %>">
+            <%= render partial: "shared/studenthomework", locals: {studenthomework: studenthomework} %>
           </div>
-          <div class="text">
-            <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-
-          </div>
-        </div>
-      </div>
-      <div class="actions">
-        <%= link_to "Delete", course_homework_studenthomework_path(@homework,@course, studenthomework), method: :delete , :class => "reply"%>
-      </div>
-      <hr>
-    <% end %>
-  <% end %>
+      <% end %>
+    </div>
+  </div>
+  
 
   <div class="container">
     <div class="row">
-     <%= form_for [@course,@homework, @studenthomework] do |f| %>
+     <%= form_for [@course,@homework, @studenthomework] , { remote: true } do |f| %>
       <div class="form-group">
         <%= f.file_field :file, class: "form-control" %>
       </div>

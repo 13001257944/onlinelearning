@@ -5,16 +5,16 @@ class CommentsController < ApplicationController
 
 
   def create
-    @comment = @coursetextbook.comments.build(comment_params)
-    @comment.user = current_user
-    @comment.save!
-    redirect_to course_coursetextbook_path(@course,@coursetextbook)
+      @comment = @coursetextbook.comments.build(comment_params)
+      @comment.user = current_user
+      @comment.save!
+      # redirect_to course_coursetextbook_path(@course,@coursetextbook)
   end
   def destroy
     @course = Course.find(params[:course_id])
     if current_user.id == @comment.user_id
       @comment.destroy
-      redirect_to course_coursetextbook_path(@course,@coursetextbook)
+      #redirect_to course_coursetextbook_path(@course,@coursetextbook)
     end
   end
 

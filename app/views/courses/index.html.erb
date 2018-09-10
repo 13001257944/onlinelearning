@@ -1,45 +1,96 @@
-
 <p id="notice"><%= notice %></p>
 
 <h1>課程列表</h1>
+<!-- <h1><a id="all" >全部課程</a>|<a id="teacher" >我是老師</a>|<a id="student" >我是學生</a></h1>
+<div id="courselist">
+  <div class="ui three cards"  id="mainn">
+    <% @courses.each do |course| %>
+      <div id="course-<%= course.id %>" class="ui card">
+        <%= render partial: "index", locals: {course: course} %> 
+      </div>
+      <br>
+    <% end %>
+    <%= paginate @courses %>
+  </div>
+</div>
+<br> -->
 
-<div class="ui three cards">
-  <% @courses.each do |course| %>
-    <div class="ui card">
-      <div class="content">
-        <div class="header"><%= course.name %></div>
-      </div>
-      <div class="content">
-        <div class="ui small feed">
-          <div class="event">
-            <div class="content">
-              <div class="summary">
-                 <%= image_tag course.photo.url  if course.photo?%>
-              </div>
-            </div>
-          </div>          
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#home">全部課程</a></li>
+  <li><a data-toggle="tab" href="#menu1">我是老師</a></li>
+  <li><a data-toggle="tab" href="#menu2">我是學生</a></li>
+</ul>
+
+<div class="tab-content">
+  <div id="home" class="tab-pane fade in active "> 
+    <br>   
+    <div class="ui three cards "  id="mainn">
+      <% @courses.each do |course| %>
+        <div id="course-<%= course.id %>" class="ui card">
+          <%= render partial: "index", locals: {course: course} %> 
         </div>
-      </div>
-      <div class="content">
-        <h4 class="ui sub header">課程說明</h4>
-        <div class="ui small feed">
-          <div class="event">
-            <div class="content">
-              <div class="summary">
-                 <%= simple_format(course.description) %>
-              </div>
-            </div>
-          </div>          
-        </div>
-      </div>
-      <div class="extra content">
-        <%= render partial: "shared/courseregistion", locals: {course: course} %>          
-      </div>
+        <br>
+      <% end %>
+      <%= paginate @courses %>
+    </div> 
+  </div>
+  <div id="menu1" class="tab-pane fade left">
+    <br>   
+    <div class="ui three cards"  id="mainn">
+      <% @courses.each do |course| %>
+        <% if course.user_id == current_user.id%>
+          <div id="course-<%= course.id %>" class="ui card">
+            <%= render partial: "index", locals: {course: course} %>
+          </div>
+        <% end %>
+        <br>
+      <% end %> 
+      <h3><%= link_to 'New Course', new_course_path %></h3>
     </div>
-    <br>
-  <% end %>
+  </div>
+  <div id="menu2" class="tab-pane fade">
+    <br>   
+    <div class="ui three cards"  id="mainn">
+      <% @courses.each do |course| %>
+        <% if course.is_courseregisted?(current_user)%>
+          <div id="course-<%= course.id %>" class="ui card">
+            <%= render partial: "index", locals: {course: course} %>
+          </div>
+        <% end %>
+        <br>
+      <% end %> 
+    </div>
+  </div>
 </div>
 
 
 
-<h3><%= link_to 'New Course', new_course_path %></h3>
+
+
+
+<script>
+ //  $("#teacher").click(function () { 
+ // console.log("Button is clicked");
+ // var input =document.createElement("div");
+ // input.innerHTML = "<%= j render partial: "teacherindex", locals: {course: @course} %>";
+ // $("#mainn").remove();
+ // $("#courselist").append(input);
+ //  })
+
+ //  $("#student").click(function () { 
+ // console.log("Button is clicked");
+ // var input =document.createElement("div");
+ // input.innerHTML = "<%= j render partial: "studentindex", locals: {course: @course} %>";
+ // $("#mainn").remove();
+ // $("#courselist").append(input);
+ //  })
+
+ // $("#all").click(function () { 
+ // console.log("Button is clicked");
+ // var input =document.createElement("div");
+ // input.innerHTML = "<%= j render partial: "allindex", locals: {course: @course} %>";
+ // $("#mainn").remove();
+ // $("#courselist").append(input);
+ //  })
+</script>
+

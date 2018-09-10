@@ -4,41 +4,48 @@ class HomeworksController < ApplicationController
   
   before_action :authenticate_user!
   def index
-    @homeworks = Homework.all
+    if current_user.id == @course.user_id
+      @homeworks = Homework.all
+    end
   end
 
   def new
-    @homework = Homework.new
+    if current_user.id == @course.user_id
+     @homework = Homework.new
+    end
   end
 
   def create
-    @homework = @course.homeworks.build(homework_params)
-    if @homework.save
-      redirect_to course_coursetextbooks_url
-    else
-      render :action => :new
+    if current_user.id == @course.user_id
+      @homework = @course.homeworks.build(homework_params)
+      if @homework.save
+        redirect_to course_coursetextbooks_url
+      else
+        render :action => :new
+      end
     end
   end
 
   def show
-    @studenthomework = Studenthomework.new
+      @studenthomework = Studenthomework.new
   end
 
   def edit
   end
 
   def update
-    if @homework.update_attributes(homework_params)
-      redirect_to course_homework_path(@course,@homework)
-    else
-      render :action => :edit
+    if current_user.id == @course.user_id
+      if @homework.update_attributes(homework_params)
+        redirect_to course_homework_path(@course,@homework)
+      else
+        render :action => :edit
+      end
     end
   end
 
   def destroy
-    @homework.destroy
-
-    redirect_to course_coursetextbooks_url
+      @homework.destroy
+      redirect_to course_coursetextbooks_url
   end
 
   

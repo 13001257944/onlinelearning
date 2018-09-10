@@ -1,0 +1,11 @@
+<div class="ui three cards"  id="mainn">
+  <% @courses.each do |course| %>
+    <% if course.user_id == current_user.id%>
+      <div id="course-<%= course.id %>" class="ui card">
+        <%= render partial: "index", locals: {course: course} %>
+      </div>
+    <% end %>
+    <br>
+  <% end %> 
+</div>
+

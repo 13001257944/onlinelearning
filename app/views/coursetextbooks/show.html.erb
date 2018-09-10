@@ -27,31 +27,18 @@
 
 <div class="ui comments">
   <h3 class="ui dividing header">留言板</h3>
-  <% @coursetextbook.comments.each do |comment| %>
-      <div class="comment">
-        <div class="content">
-          <a class="author"><%= comment.user.name %></a>
-          <div class="metadata">
-            <span class="date"><%= comment.created_at %></span>
+  <div>
+    <div id="commentlist">
+      <% @coursetextbook.comments.each do |comment| %>     
+          <div id="comment-<%= comment.id %>">
+            <%= render partial: "shared/comment", locals: {comment: comment} %>
           </div>
-          <div class="text">
-            <%= comment.content %>
-<!--             <%= simple_format comment.content %>
- -->
-          </div>
-        </div>
-      </div>
-
-      <% if current_user.id == comment.user_id %>
-        <div class="actions">
-          <%= link_to "Delete", course_coursetextbook_comment_path(@coursetextbook,@course, comment), method: :delete , :class => "reply"%>
-        </div>
       <% end %>
-      <hr>
-  <% end %>
+    </div>
+  </div>
   <div class="container">
     <div class="row">
-     <%= form_for [@course,@coursetextbook, @comment] do |f| %>
+     <%= form_for [@course,@coursetextbook, @comment], { remote: true }  do |f| %>
       <div class="form-group">
         <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
       </div>
@@ -63,4 +50,6 @@
     </div>
   </div>
 </div>
+
+
 

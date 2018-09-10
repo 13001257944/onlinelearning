@@ -5,16 +5,14 @@ class StudenthomeworksController < ApplicationController
 
 
   def create
-    @studenthomework = @homework.studenthomeworks.build(studenthomework_params)
-    @studenthomework.user = current_user
-    @studenthomework.save!
-    redirect_to course_homework_path(@course,@homework)
+      @studenthomework = @homework.studenthomeworks.build(studenthomework_params)
+      @studenthomework.user = current_user
+      @studenthomework.save!
   end
   def destroy
     @course = Course.find(params[:course_id])
     if current_user.id == @studenthomework.user_id
       @studenthomework.destroy
-      redirect_to course_homework_path(@course,@homework)
     end
   end
 

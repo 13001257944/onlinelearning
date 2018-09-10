@@ -1,0 +1,30 @@
+<div class="content">
+  <div class="header"><%= course.name %></div>
+</div>
+<div class="content">
+  <div class="ui small feed">
+    <div class="event">
+      <div class="content">
+        <div class="summary">
+           <%= image_tag course.photo.url  if course.photo?%>
+        </div>
+      </div>
+    </div>          
+  </div>
+</div>
+<div class="content">
+  <h4 class="ui sub header">課程說明</h4>
+  <div class="ui small feed">
+    <div class="event">
+      <div class="content">
+        <div class="summary">
+           <%= truncate(course.description, length: 15) %>
+        </div>
+      </div>
+    </div>          
+  </div>
+</div>
+<div class="extra content">
+  <%= render partial: "shared/courseregistion", locals: {course: course} %>          
+</div>
+

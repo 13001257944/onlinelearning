@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+
+<h1>課程列表</h1>
+<div class="item">
+  <%= link_to('上課', courseregistion_course_path(@course,@courseregistion),:class=>"ui inverted button") %> 
+</div>
+
+<div class="ui three cards">
+  <% @courses.each do |course| %>
+    <% if course.user_id == current_user.id%>
+      <div id="course-<%= course.id %>" class="ui card">
+        <%= render partial: "index", locals: {course: course} %>
+      </div>
+    <% end %>
+   <br>
+  <% end %> 
+</div>

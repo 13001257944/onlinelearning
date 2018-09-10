@@ -12,33 +12,38 @@ class CoursetextbooksController < ApplicationController
   end
 
   def create
-    @coursetextbook = @course.coursetextbooks.build(coursetextbook_params)
-    if @coursetextbook.save
-      redirect_to course_coursetextbooks_url
-    else
-      render :action => :new
+    if current_user.id == @course.user_id
+      @coursetextbook = @course.coursetextbooks.build(coursetextbook_params)
+      if @coursetextbook.save
+        redirect_to course_coursetextbooks_url
+      else
+        render :action => :new
+      end
     end
   end
 
   def show
-    @comment = Comment.new
+      @comment = Comment.new
   end
 
   def edit
   end
 
   def update
-    if @coursetextbook.update_attributes(coursetextbook_params)
-      redirect_to course_coursetextbook_path(@course,@coursetextbook)
-    else
-      render :action => :edit
+    if current_user.id == @course.user_id
+      if @coursetextbook.update_attributes(coursetextbook_params)
+        redirect_to course_coursetextbook_path(@course,@coursetextbook)
+      else
+        render :action => :edit
+      end
     end
   end
 
   def destroy
-    @coursetextbook.destroy
-
-    redirect_to course_coursetextbooks_url
+    if current_user.id == @course.user_id
+      @coursetextbook.destroy
+      redirect_to course_coursetextbooks_url
+    end    
   end
 
   private

@@ -3,7 +3,6 @@ class CourseregistionsController < ApplicationController
 
 
 
-
   def create
     @course = Course.find(params[:course_id])
     @courseregistion = @course.courseregistions.build(course_id: params[:course_id])
