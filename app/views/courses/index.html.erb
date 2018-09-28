@@ -10,7 +10,7 @@
       </div>
       <br>
     <% end %>
-    <%= paginate @courses %>
+    
   </div>
 </div>
 <br> -->
@@ -26,12 +26,13 @@
     <br>   
     <div class="ui three cards "  id="mainn">
       <% @courses.each do |course| %>
-        <div id="course-<%= course.id %>" class="ui card">
-          <%= render partial: "index", locals: {course: course} %> 
-        </div>
+        <% if course.status == "公開" %>
+           <div id="course-<%= course.id %>" class="ui card">
+             <%= render partial: "index", locals: {course: course} %> 
+           </div>
+        <% end %>
         <br>
       <% end %>
-      <%= paginate @courses %>
     </div> 
   </div>
   <div id="menu1" class="tab-pane fade left">
@@ -69,6 +70,9 @@
 
 
 <script>
+// $(document).ready(function() {
+  
+
  //  $("#teacher").click(function () { 
  // console.log("Button is clicked");
  // var input =document.createElement("div");

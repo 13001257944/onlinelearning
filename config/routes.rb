@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   devise_for :users, :controllers => { :registrations => "users/registrations" }
-
+  resources :users, only: [:show, :edit, :update]  
+  resources :selflearns
   
   resources :courses do
     
     resources :homeworks do
-      resources :studenthomeworks , only: [:create, :destroy]
+      resources :studenthomeworks , only: [:index ,:create, :destroy]
     end
     member do
       post :courseregistion
@@ -14,6 +15,10 @@ Rails.application.routes.draw do
     end
     resources :coursetextbooks do
       resources :comments , only: [:create, :destroy]
+      member do
+        post :finish
+        post :notfinish
+      end
     end
   end
 

@@ -12,14 +12,19 @@
   <%= @homework.description %>
 </p>
 
-
-
-
-
+<br>
+<br>
+<br>
+<br>
+<br>
 <% if current_user.id == @course.user_id %>
   <%= link_to '編輯教材', edit_course_homework_path(@course,@homework) %> 
 <% end %>
 <%= link_to '返回', course_coursetextbooks_path %>
+<hr>
+<br>
+<br>
+
 
 <div class="ui comments">
   <h3 class="ui dividing header">作業繳交</h3>
@@ -34,18 +39,35 @@
   </div>
 </div>
   
-
-  <div class="container">
-    <div class="row">
-     <%= form_for [@course,@homework, @studenthomework] , { remote: true } do |f| %>
+<div class="container">
+  <div class="row">
+    <%= form_for [@course,@homework, @studenthomework] , { remote: true } do |f| %>
       <div class="form-group">
-        <%= f.file_field :file, class: "form-control" %>
+        <h4 class="mb-3">檔案上傳</h4>
+        <%= f.file_field :file, class: "form-control" ,:required => true%>
       </div>
       <div class="form-group">
-        <%= f.submit class: "btn btn-primary" %>
-        <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+        <h4 class="mb-3">作業狀態</h4>
+        <div class="d-block my-3">
+          <div class="custom-control custom-radio">
+            <%= f.radio_button :status, "公開" ,:class=>"custom-control-input" ,:required => true %>
+            <%= f.label :status, "公開" %>
+          </div>
+          <div class="custom-control custom-radio">
+            <%= f.radio_button :status, "不公開" ,:class=>"custom-control-input" ,:required => true %>
+            <%= f.label :status, "不公開" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <h4 class="mb-3">說明</h4>
+        <%= f.text_area :description, class: "form-control",:required => true %>
+      </div>
+      <div class="form-group">
+        <%= f.submit "繳交" , class: "btn btn-primary" %>
+        <%= f.button "取消", type: :reset, class: "btn btn-default" %>
       </div>
     <% end %>
-    </div>
   </div>
+</div>
 

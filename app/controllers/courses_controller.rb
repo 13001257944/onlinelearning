@@ -1,19 +1,20 @@
 class CoursesController < ApplicationController
   layout "index"
+  # root"courses#index"
   before_action :authenticate_user!
-  before_action :set_course, only: [:show, :edit, :update, :destroy]
+  before_action :set_course, only: [:show, :edit, :update, :destroy, :finish]
 
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.page(params[:page]).per(6)
+    @courses = Course.all
   end
-  def studentindex
-    @courses = Course.page(params[:page]).per(6)
-  end
-  def teacherindex
-    @courses = Course.page(params[:page]).per(6)
-  end
+  # def studentindex
+  #   @courses = Course.page(params[:page]).per(6)
+  # end
+  # def teacherindex
+  #   @courses = Course.page(params[:page]).per(6)
+  # end
 
   # GET /courses/1
   # GET /courses/1.json
@@ -69,7 +70,7 @@ class CoursesController < ApplicationController
     if current_user.id == @course.user_id
       @course.destroy
       respond_to do |format|
-        format.html { redirect_to courses_url, notice: 'Course was successfully destroyed.' }
+        format.html { redirect_to courses_url, notice: 'Course was successfully finish.' }
         format.json { head :no_content }
       end
     end
@@ -98,8 +99,15 @@ class CoursesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def course_params
-      params.require(:course).permit(:name, :photo, :description, :user_id)
+      params.require(:course).permit(:name, :photo, :description, :user_id, :status)
     end
+
+    def authenticate_admin
+     unless current_user.admin?
+       flash[:alert] = "Not allow!"
+       redirect_to root_path
+     end
+   end
 
     
 

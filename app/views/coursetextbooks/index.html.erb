@@ -8,18 +8,38 @@
 </tr> -->
 
 <% i=0 %>
+<% inx=0 %>
 <% @course.coursetextbooks.each do |coursetextbook| %>
+  <% if coursetextbook.status != "不公開" && current_user.id != @course.user_id %>
     <% i=i+1 %>
     <div class="ui clearing segment">
-      <p>Lesson <%=i%> : <%= link_to coursetextbook.title, course_coursetextbook_path(@course,coursetextbook)  %></p>
-      <% if current_user.id == @course.user_id %>
-         <div class=" ui right floated buttons">
-            <td><%= link_to '編輯教材', edit_course_coursetextbook_path(@course,coursetextbook), :class => "ui red basic button" %></td>
-            <td><%= link_to "刪除教材", course_coursetextbook_path(@course, coursetextbook), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
-         </div>
-       <% end %>
+      <p>Lesson <%=i%> : <%= link_to coursetextbook.title, course_coursetextbook_path(@course,coursetextbook)  %>
+        <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %>
+          <% if coursetextbook.id == finishcoursetextbook.coursetextbook_id && current_user.id == finishcoursetextbook.user_id%>
+              <img src="https://www.dancealong.com.au/wp-content/themes/babykids/img/login.png" width="30" height="30">
+          <% end %>
+        <% end %>
+      </p>
     </div>
-   
+  <% end %>
+      
+  <% if current_user.id == @course.user_id %>
+    <% inx = inx+1 %>
+    <div class="ui clearing segment">
+      <p>Lesson <%=inx%> : <%= link_to coursetextbook.title, course_coursetextbook_path(@course,coursetextbook)  %>
+        <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %>
+          <% if coursetextbook.id == finishcoursetextbook.coursetextbook_id && current_user.id == finishcoursetextbook.user_id%>
+              <img src="https://www.dancealong.com.au/wp-content/themes/babykids/img/login.png" width="30" height="30">
+          <% end %>
+        <% end %>
+        <div class=" ui right floated buttons">
+           <td><%= link_to '編輯教材', edit_course_coursetextbook_path(@course,coursetextbook), :class => "ui red basic button" %></td>
+           <td><%= link_to "刪除教材", course_coursetextbook_path(@course, coursetextbook), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
+        </div>
+      </p>
+    </div>
+    
+  <% end %>  
 <% end %>
 
 <h1>作業區</h1>
@@ -37,11 +57,19 @@
     </div>
    
 <% end %>
+
+<h1>作品分享</h1>
+  <div class="ui clearing segment">
+    <p> <%= link_to "公開作業" ,course_homeworks_path(@course)  %></p>
+  </div>
+<h1>課後心得</h1>
  
 
 <br>
-<% if current_user.id == @course.user_id %>
-  <h3><%= link_to 'New Lesson', new_course_coursetextbook_path %></h3>  
-  <h3><%= link_to 'New Homework', new_course_homework_path %></h3>
-<% end -%>
-<%= link_to '返回', courses_path %>
+<h4>
+  <% if current_user.id == @course.user_id %>
+    <%= link_to '新增課程', new_course_coursetextbook_path %>|
+    <%= link_to '新增作業', new_course_homework_path %>|
+  <% end -%>
+  <%= link_to '返回', courses_path %>
+</h4>

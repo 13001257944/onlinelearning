@@ -11,12 +11,16 @@
 // about supported directives.
 //
 //= require rails-ujs
-//= require turbolinks
 //= require ckeditor/init
+//= require popper
 //= require jquery
+//= require bootstrap.min
 //= require bootstrap-sprockets
 //= require bootstrap-datepicker
+//= require d3
+//= require c3
 //= require semantic-ui
 //= require semantic-ui/modal
 //= require semantic-ui/dropdown
+//= require turbolinks
 //= require_tree .

@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>課程單元</h1>
+<h1>作業分享</h1>
 
 <!-- <tr>
   <th>課程單元</th>
@@ -8,40 +8,64 @@
 </tr> -->
 
 
-<% @course.homeworks.each do |homework| %>
-    <% i=i+1 %>
-    <div class="ui clearing segment">
-      <p>Lesson <%=i%> : <%= link_to homework.title, course_homework_path(@course,homework)  %></p>
-      <% if current_user.id == @course.user_id %>
-         <div class=" ui right floated buttons">
-            <td><%= link_to '編輯教材', edit_course_homework_path(@course,homework), :class => "ui red basic button" %></td>
-            <td><%= link_to "刪除教材", course_homework_path(@course, homework), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
-         </div>
-       <% end %>
+<!-- <div class="ui comments">
+  <div>
+    <div id="studenthomeworklist">
+      <% @course.homeworks.each do |homework| %>
+        <% homework.studenthomeworks.each do |studenthomework| %>   
+          <div id="studenthomework-<%= studenthomework.id %>">
+            <div class="comment">
+              <div class="content">
+                <a class="author"><%= studenthomework.user.name %></a>
+                <div class="metadata">
+                  <span class="date"><%= studenthomework.created_at %></span>
+                </div>
+                <div class="text">
+                  <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+                  <%= studenthomework.description %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
     </div>
-   
-<% end %>
-
-<h1>作業區</h1>
-<% z=0 %>
-<% @course.homeworks.each do |homework| %>
-    <% z=z+1 %>
-    <div class="ui clearing segment">
-      <p>Lesson <%=z%> : <%= link_to homework.name, course_homework_path(@course,homework)  %></p>
-      <% if current_user.id == @course.user_id %>
-         <div class=" ui right floated buttons">
-            <td><%= link_to '編輯作業', edit_course_homework_path(@course,homework), :class => "ui red basic button" %></td>
-            <td><%= link_to "刪除作業", course_homework_path(@course, homework), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
-         </div>
-       <% end %>
-    </div>
-   
-<% end %>
- 
-
+  </div>
+</div> -->
+<table class="ui celled padded table">
+  <thead>
+    <tr><th class="single line">分享人</th>
+    <th>檔案</th>
+    <th>建立時間</th>
+    <th>作業描述</th>
+    <th>說明</th>
+  </tr></thead>
+  <tbody>
+   <% @course.homeworks.each do |homework| %>
+     <% homework.studenthomeworks.each do |studenthomework| %>  
+       <% homework.studenthomeworks.each do |studenthomework| %>
+          <tr>
+            <td>
+              <h4 class="ui center aligned header"><%= studenthomework.user.name %></h4>
+            </td>
+            <td class="single line">
+              <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+            </td>
+            <td class="right aligned">
+              <%= studenthomework.created_at %>
+            </td>
+            <td>
+              <%= homework.description%>
+            </td>                      
+            <td>
+              <%= studenthomework.description %>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
 <br>
-<% if current_user.id == @course.user_id %>
-  <h3><%= link_to 'New Lesson', new_course_coursetextbook_path %></h3>
-  <h3><%= link_to 'New Homework', new_course_homework_path %></h3>    
-  <% end -%>
-<%= link_to '返回', courses_path %>
+
+<h4><%= link_to '返回', courses_path %></h4>  

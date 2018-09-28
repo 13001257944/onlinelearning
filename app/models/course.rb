@@ -10,5 +10,7 @@ class Course < ApplicationRecord
   def is_courseregisted?(user)
     self.courseregisted_users.include?(user)
   end
+
+  
   
 end

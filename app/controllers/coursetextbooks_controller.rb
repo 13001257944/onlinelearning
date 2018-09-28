@@ -46,19 +46,40 @@ class CoursetextbooksController < ApplicationController
     end    
   end
 
+  def finish
+    @coursetextbook = Coursetextbook.find(params[:id])
+    @coursetextbook.finishcoursetextbooks.create!(user: current_user)
+    redirect_back(fallback_location: root_path)  # 導回上一頁
+  end
+
+  def notfinish
+    @coursetextbook = Coursetextbook.find(params[:id])
+    finishcoursetextbooks = Finishcoursetextbook.where(coursetextbook: @coursetextbook, user: current_user)
+    finishcoursetextbooks.destroy_all
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def set_course
     @course = Course.find(params[:course_id])
+    @courses = Course.all
   end
 
   def set_coursetextbook
     @coursetextbook = Coursetextbook.find(params[:id])
   end
   def coursetextbook_params
-    params.require(:coursetextbook).permit(:title, :body, :code)
+    params.require(:coursetextbook).permit(:title, :body, :code, :id,:status)
   end
   
+  def authenticate_admin
+     unless current_user.admin?
+       flash[:alert] = "Not allow!"
+       redirect_to root_path
+     end
+   end
+
 
   
 

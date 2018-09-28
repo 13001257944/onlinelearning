@@ -2,22 +2,36 @@
   <div class="row">
    <%= form_for [@course, @coursetextbook] do |f| %>
     <div class="form-group">
-      Title:<br><%= f.text_area :title, placeholder: "主題", class: "form-control" %>
+      Title:<br><%= f.text_area :title, placeholder: "主題", class: "form-control" ,:required => true %>
+    </div>
+    <div class="form-group">
+      <h4 class="mb-3">教材狀態</h4>
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio">
+          <%= f.radio_button :status, "公開" ,:class=>"custom-control-input" ,:required => true %>
+          <%= f.label :status, "公開" %>
+        </div>
+        <div class="custom-control custom-radio">
+          <%= f.radio_button :status, "不公開" ,:class=>"custom-control-input" ,:required => true %>
+          <%= f.label :status, "不公開" %>
+        </div>
+      </div>
     </div>
     <div class="form-group">
       教材內容:<br><%= f.cktext_area :body, placeholder: "教材內容", class: "form-control" %>
     </div>
+
     <h4 class="mb-3">線上coding</h4>
-              <div class="d-block my-3">
-                <div class="custom-control custom-radio">
-                  <%= f.radio_button :code, "Ruby" ,:class=>"custom-control-input" ,:required => true%>
-                  <%= f.label :code, "Ruby" %>
-                </div>
-                <div class="custom-control custom-radio">
-                  <%= f.radio_button :code, "NORuby" ,:class=>"custom-control-input" ,:required => true%>
-                  <%= f.label :code, "不需要" %>
-                </div>
-              </div>
+    <div class="d-block my-3">
+      <div class="custom-control custom-radio">
+        <%= f.radio_button :code, "Ruby" ,:class=>"custom-control-input" ,:required => true%>
+        <%= f.label :code, "Ruby" %>
+      </div>
+      <div class="custom-control custom-radio">
+        <%= f.radio_button :code, "NORuby" ,:class=>"custom-control-input" ,:required => true%>
+        <%= f.label :code, "不需要" %>
+      </div>
+    </div>
     <div class="form-group">
       <%= f.submit class: "btn btn-primary" %>
       <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>

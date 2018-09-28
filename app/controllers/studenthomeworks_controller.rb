@@ -1,8 +1,13 @@
 class StudenthomeworksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_course 
-  before_action :set_homework 
+  before_action :set_homework, except:[:index] 
   before_action :set_studenthomework ,only:[:destroy]
 
+  def index
+    @homeworks = Homework.all
+    @studenthomeworks = Studenthomework.all
+  end
 
   def create
       @studenthomework = @homework.studenthomeworks.build(studenthomework_params)
@@ -18,8 +23,15 @@ class StudenthomeworksController < ApplicationController
 
   private
 
+  def authenticate_admin
+    unless current_user.admin?
+      flash[:alert] = "Not allow!"
+      redirect_to root_path
+    end
+  end
+
   def studenthomework_params
-    params.require(:studenthomework).permit(:file)
+    params.require(:studenthomework).permit(:description,:file, :status)
   end
 
   def homework_params

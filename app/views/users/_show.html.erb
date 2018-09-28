@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+       <!-- page-header 裡面顯示個人檔案資料 -->
+      <div class="page-header">
+         <div class="col-md-3 col-sm-4">
+          <div class="text-center">
+            <%= image_tag @user.avatar, class: "img-responsive img-rounded" %>
+          </div>
+        </div>
+         <div class="col-md-9 col-sm-8">
+          <h2><%= @user.name %></h2>
+          <p><strong><%= @user.email %></strong></p>
+<!--           <div><%= simple_format @user.intro %></div>
+ -->          
+          <div>
+            <label for="sex">性別:<%= @user.sex %></label>
+          </div>
+          <div>
+            <label for="email">Email:<%= @user.email %></label>
+          </div>
+          <div>
+            <label for="birthday">生日:<%= @user.birthday %></label>
+          </div>
+          <div>
+            <label for="college">畢業學校:<%= @user.college %></label>
+          </div>  
+          <div>
+            <% if @user.email == current_user.email %>
+            <%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary" %>
+            <% end %>
+          </div>      
+        </div>
+        <div class="clearfix"></div>
+       </div>
+       <br>
+       <div class="row">
+        <div class="col-md-8 order-md-1">
+          <h3 class="mb-3">基本資料</h4>
+          
+          <div class="mb-3">
+            <h4 for="intro">自我介紹</h4>
+            <div><%= @user.intro %></div> 
+          </div>
+          <br>
+          
+
+          <h4 class="mb-3">是否曾經接觸過程式語言</h4>
+          <%if  @user.programming == "programming_yes" %>
+            <div>是</div>
+          <% else %>
+            <div>否</div>
+          <% end %>
+
+          <h4 class="mb-3">是否曾經接觸過Ruby on Rails</h4>
+          <%if  @user.ror == "ror_yes" %>
+            <div>是</div>
+          <% else %>
+            <div>否</div>
+          <% end %>
+        </div>
+      </div>
+     </div>
+  </div>
+</div>
+
+

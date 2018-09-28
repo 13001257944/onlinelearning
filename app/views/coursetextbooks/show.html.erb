@@ -15,16 +15,26 @@
   <h1 style="font-style: italic;"><span style="background-color:#FFFFE0;">程式練習</span></h1>
   <p><iframe allowfullscreen="true" allowtransparency="true" frameborder="no" height="400px" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" scrolling="no" src="https://repl.it/@z1z1z1joey/TurbulentGentleGraph?lite=true" width="100%"></iframe></p>
 <% end %>
-
-
-
-
-
-<% if current_user.id == @course.user_id %>
-  <%= link_to '編輯教材', edit_course_coursetextbook_path(@course,@coursetextbook) %> 
+<% if @coursetextbook.is_finished?(current_user) %>
+  尚未完成單元學習，請點擊按鈕-NotFinish
+  <p> 
+    <%= link_to 'Notfinish', notfinish_course_coursetextbook_path(@course,@coursetextbook), method: :post, class: "btn btn-info" %>
+  </p>
+<% else %>
+  完成單元學習，請點擊按鈕-Finish
+  <p>
+    <%= link_to 'Finish', finish_course_coursetextbook_path(@course,@coursetextbook), method: :post, class: "btn btn-primary" %>
+  </p> 
 <% end %>
-<%= link_to '返回', course_coursetextbooks_path %>
 
+
+
+<p>
+  <% if current_user.id == @course.user_id %>
+    <%= link_to '編輯教材', edit_course_coursetextbook_path(@course,@coursetextbook) %> 
+  <% end %>
+  <%= link_to '返回', course_coursetextbooks_path %>
+</p>
 <div class="ui comments">
   <h3 class="ui dividing header">留言板</h3>
   <div>

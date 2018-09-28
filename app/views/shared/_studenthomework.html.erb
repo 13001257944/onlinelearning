@@ -7,7 +7,7 @@
       </div>
       <div class="text">
         <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-
+        <%= studenthomework.description %>
       </div>
     </div>
   </div>
@@ -17,7 +17,7 @@
   </div>
   <hr>
 <% else %>
-  <% if current_user.id == @course.user_id %>
+  <% if current_user.id != @course.user_id %>
     <div class="comment">
       <div class="content">
         <a class="author"><%= studenthomework.user.name %></a>
@@ -26,8 +26,8 @@
         </div>
         <div class="text">
           <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-
         </div>
+        <hr>
       </div>
     </div>
   <% end %>

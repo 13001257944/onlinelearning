@@ -4,7 +4,6 @@
 <% elsif current_user.id == course.user_id %>
   <td><%= link_to '進入課程', course_coursetextbooks_path(course) , :class => 'ui inverted green button' %></td>
   <td><%= link_to '編輯', edit_course_path(course), :class => 'ui inverted teal button' %></td>
-  <td><%= link_to '刪除', course, method: :delete,  :class => 'ui inverted red button', data: { confirm: 'Are you sure?' } %></td>  
 <% else %> 
   <td><%= link_to '課程簡介', course_path(course) , :class => 'ui inverted brown button' %></td> 
   <td><%= link_to '註冊',courseregistion_course_path(course), method: :post ,  :class => 'yellow ui button' , data: { confirm: '確定要註冊？' }%></td>         

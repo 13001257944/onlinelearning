@@ -1,0 +1,219 @@
+<script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<%= javascript_include_tag "liquidFillGauge.js" %>
+<%= javascript_include_tag "newchart.js"  %>
+
+<body class="bg-light">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">個人資料</a></li>
+    <li><a data-toggle="tab" href="#menu1">學習歷程</a></li>
+    <li><a data-toggle="tab" href="#menu2">個人作品集</a></li>
+  </ul>
+  <br>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active "> 
+      <div class="container">
+        <div class="row">
+          <div class="col-md-10 col-md-offset-1">
+             <!-- page-header 裡面顯示個人檔案資料 -->
+            <div class="page-header">
+               <div class="col-md-3 col-sm-4">
+                 <div class="text-center">
+                   <%= image_tag @user.avatar, class: "img-responsive img-rounded" %>
+                 </div>
+               </div>
+
+               <div class="col-md-9 col-sm-8">
+                 <h2><%= @user.name %></h2>
+                 <p><strong><%= @user.email %></strong></p>        
+                 <div>
+                   <label for="sex">性別:<% if @user.sex == "1"
+                                                a = "男生"
+                                             elsif @user.sex=="0"
+                                                a= "女生"
+                                             else
+                                                a= "其他"
+                                             end %><%= a %></label>
+                 </div>
+                 <div>
+                   <label for="email">Email:<%= @user.email %></label>
+                 </div>
+                 <div>
+                   <label for="birthday">生日:<%= @user.birthday %></label>
+                 </div>
+                 <div>
+                   <label for="college">畢業學校:<%= @user.college %></label>
+                 </div>                  
+                 <div>
+                    <% if @user.email == current_user.email %>
+                      <%= link_to 'Edit Profile', edit_user_registration_path, class: "btn btn-primary" %>
+                    <% end %>
+                  </div>      
+               </div>
+              <div class="clearfix"></div>
+             </div>
+             <br>
+             <div class="row">
+              <div class="col-md-8 order-md-1">
+                <h3 class="mb-3">基本資料</h4>
+                
+                <div class="mb-3">
+                  <h4 for="intro">自我介紹</h4>
+                  <div><%= @user.intro %></div> 
+                </div>
+                <br>
+                
+
+                <h4 class="mb-3">是否曾經接觸過程式語言</h4>
+                <%if  @user.programming == "programming_yes" %>
+                  <div>是</div>
+                <% else %>
+                  <div>否</div>
+                <% end %>
+
+                <h4 class="mb-3">是否曾經接觸過Ruby on Rails</h4>
+                <%if  @user.ror == "ror_yes" %>
+                  <div>是</div>
+                <% else %>
+                  <div>否</div>
+                <% end %>
+              </div>
+            </div>
+           </div>
+      </div>
+    </div>
+
+
+
+    </div>
+          
+    <div id="menu1" class="tab-pane fade left">
+      <table class="ui celled padded table">
+        <thead>
+          <tr><th class="single line">課程</th>
+          <th>單完完成率</th>
+          <th>作業完成率</th>
+          <th>課程完成率</th>
+          <th>留言次數</th>
+        </tr></thead>
+        <tbody>
+          <% inx = 0%>
+          <% @courses.each do |course| %>
+            <% course.courseregistions.each do |courseregistion| %>
+              <% if courseregistion.user_id == current_user.id%> 
+                <% a,b,c,d,e,f,g,h = [0,0,0,0,0,0,0,0] %>              
+                <% course.coursetextbooks.each do |coursetextbook| %> 
+                  <% a = a+1 %>
+                  <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %> 
+                    <% if finishcoursetextbook.user_id == current_user.id%> 
+                      <% b = b+1%>  
+                    <% end %>               
+                  <% end %> 
+                  <% coursetextbook.comments.each do |comment| %>
+                    <% if comment.user_id == current_user.id%> 
+                      <% h = h+1%>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                <% course.homeworks.each do |homework| %>
+                  <% d = d+1%>
+                  <% homework.studenthomeworks.each do |studenthomework|%>
+                    <% if studenthomework.user_id == current_user.id%>
+                      <% e = e+1%>
+                    <% end %>
+                  <% end %>               
+                <% end %>
+                <% if a==0 
+                     a=1.0
+                   end
+                   if d==0 
+                     d=1.0
+                   end
+                  c = (b.to_f/a)*100
+                  f = (e.to_f/d)*100 
+                  g = (((b+e).to_f)/(a+d))*100
+                  %>
+                <% inx =inx + 1%>
+                
+                <tr>
+                  
+
+                  <td><%= course.name%></td>
+                  <td>
+    
+
+                  <svg id="fillgaugeType1_<%= inx %>" width="100" height="100" onload="setChart(1,<%= inx %>,<%= c.round(2) %>)"></svg>
+                  </td>         
+                  <td>
+                   
+                     <svg id="fillgaugeType2_<%= inx %>" width="100" height="100" onload="setChart(2,<%= inx %>,<%= f.round(2) %>)"></svg>
+                  </td>
+                  <td>
+   <svg id="fillgaugeType3_<%= inx %>" width="100" height="100" onload="setChart(3,<%= inx %>,<%= g.round(2) %>)"></svg>
+                  </td>
+                  <td><%= h %></td>
+                </tr>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>     
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <table class="ui celled padded table">
+        <thead>
+          <tr><th class="single line">課程</th>
+          <th>作業</th>
+          <th>Efficacy</th>
+          <th>作業描述</th>
+          <th>說明</th>
+        </tr></thead>
+        <tbody>
+          <% @courses.each do |course| %>
+            <% course.courseregistions.each do |courseregistion| %>
+              <% if courseregistion.user_id == current_user.id%>
+                <% course.homeworks.each do |homework| %>
+                  <% homework.studenthomeworks.each do |studenthomework| %>
+                    <tr>
+                      <td>
+                        <h4 class="ui center aligned header"><%= course.name %></h4>
+                      </td>
+                      <td class="single line">
+                        <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+                      </td>
+                      <td class="right aligned">
+                        80% <br>
+                        <a href="#">18 studies</a>
+                      </td>
+                      <td>
+                        <%= homework.description%>
+                      </td>                      
+                      <td>
+                        <%= studenthomework.description%>
+                      </td>
+                    </tr>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</body>
+
+
+
+
+    
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+

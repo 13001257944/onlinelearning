@@ -6,6 +6,7 @@ class HomeworksController < ApplicationController
   def index
     if current_user.id == @course.user_id
       @homeworks = Homework.all
+      @studenthomeworks = Studenthomework.all
     end
   end
 
@@ -62,5 +63,12 @@ class HomeworksController < ApplicationController
     params.require(:homework).permit(:name, :description, :file)
   end
   
+  def authenticate_admin
+     unless current_user.admin?
+       flash[:alert] = "Not allow!"
+       redirect_to root_path
+     end
+   end
+
 
 end
