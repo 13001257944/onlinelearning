@@ -43,25 +43,23 @@
   <tbody>
    <% @course.homeworks.each do |homework| %>
      <% homework.studenthomeworks.each do |studenthomework| %>  
-       <% homework.studenthomeworks.each do |studenthomework| %>
-          <tr>
-            <td>
-              <h4 class="ui center aligned header"><%= studenthomework.user.name %></h4>
-            </td>
-            <td class="single line">
-              <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-            </td>
-            <td class="right aligned">
-              <%= studenthomework.created_at %>
-            </td>
-            <td>
-              <%= homework.description%>
-            </td>                      
-            <td>
-              <%= studenthomework.description %>
-            </td>
-          </tr>
-        <% end %>
+        <tr>
+          <td>
+            <h4 class="ui center aligned header"><%= studenthomework.user.name %></h4>
+          </td>
+          <td class="single line">
+            <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+          </td>
+          <td class="right aligned">
+            <%= studenthomework.created_at %>
+          </td>
+          <td>
+            <%= homework.description%>
+          </td>                      
+          <td>
+            <%= studenthomework.description %>
+          </td>
+        </tr>
       <% end %>
     <% end %>
   </tbody>
