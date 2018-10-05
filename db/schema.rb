@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180928075944) do
+ActiveRecord::Schema.define(version: 20181002161728) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -87,6 +87,15 @@ ActiveRecord::Schema.define(version: 20180928075944) do
     t.string "fileload_content_type"
     t.integer "fileload_file_size"
     t.datetime "fileload_updated_at"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.text "content"
+    t.integer "coursetextbook_id"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "status"
   end
 
   create_table "registrations", force: :cascade do |t|

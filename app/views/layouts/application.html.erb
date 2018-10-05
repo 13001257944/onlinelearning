@@ -108,6 +108,12 @@
           font-size: 1.5em;
         }
       }
+      @media (max-width: 480px) {
+          iframe[src *= "youtube"]{
+              max-width:360px;
+              height: 197px;
+          }
+      }
     </style>
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
@@ -185,6 +191,23 @@
                 .sidebar('attach events', '.toc.item')
               ;
             });
+        var w = 350;
+        var _w = $(window).width();
+        $(function(){
+        if(_w <= 480){
+        var ifrs = document.getElementsByTagName('iframe');
+        for(var i=0;i<ifrs.length;i++){
+        var ifr = ifrs[i];
+        var a = ifr.src;
+        if(a.indexOf('https://www.facebook.com/') == -1) continue;
+        var b = a.indexOf('&width=');
+        var c = a.substring(0, b + 7);
+        var d = c + w;
+        ifr.src = d;
+        ifr.width = w;
+        }
+        }
+        });
 
     </script> 
  </head>
@@ -207,7 +230,7 @@
               <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 
             </div>
             <div class="item">
-               <%= link_to('個人學習', selflearn_path(current_user), :class=>"ui button") %>
+               <%= link_to('個人學習', users_path, :class=>"ui button") %>
             </div>
             <!-- <div class="item">
                <%= link_to 'Profile', user_path(current_user), :class=>"ui button" %>
@@ -238,7 +261,7 @@
           <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 
         </div>
         <div class="item">
-           <%= link_to('個人學習', selflearn_path(current_user), :class=>"ui button") %>
+           <%= link_to('個人學習', users_path, :class=>"ui button") %>
         </div>
         <!-- <div class="item">
                <%= link_to 'Profile', user_path(current_user), :class=>"ui button" %>
@@ -275,7 +298,7 @@
                   <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui inverted button") %> 
                 </div>
                 <div class="item">
-                   <%= link_to('個人學習', selflearn_path(current_user), :class=>"ui inverted button") %>
+                   <%= link_to('個人學習', users_path, :class=>"ui inverted button") %>
                 </div>
                 <!-- <div class="item">
                    <%= link_to 'Profile', user_path(current_user), :class=>"ui inverted button" %>

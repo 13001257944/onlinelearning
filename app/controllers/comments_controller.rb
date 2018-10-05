@@ -1,8 +1,8 @@
 class CommentsController < ApplicationController
-    before_action :set_course 
-    before_action :set_coursetextbook 
-    before_action :set_comment ,only:[:destroy]
-    before_action :authenticate_user!
+  before_action :set_course 
+  before_action :set_coursetextbook 
+  before_action :set_comment ,only:[:destroy]
+  before_action :authenticate_user!
 
 
 

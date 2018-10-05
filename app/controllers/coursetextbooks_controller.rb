@@ -24,6 +24,8 @@ class CoursetextbooksController < ApplicationController
 
   def show
       @comment = Comment.new
+      @note = Note.new
+      
   end
 
   def edit

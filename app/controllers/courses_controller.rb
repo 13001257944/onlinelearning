@@ -67,7 +67,7 @@ class CoursesController < ApplicationController
   # DELETE /courses/1
   # DELETE /courses/1.json
   def destroy
-    if current_user.id == @course.user_id
+    if current_user.id == @course.user_id || current_user.id == 1
       @course.destroy
       respond_to do |format|
         format.html { redirect_to courses_url, notice: 'Course was successfully finish.' }

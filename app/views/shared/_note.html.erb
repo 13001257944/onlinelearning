@@ -1,0 +1,18 @@
+<div class="container" >
+  <div class="content" id="notecontent">
+    <div class="text" id="notetext" >
+      <%= raw note.content %>
+    </div>
+    <div class="metadata">
+      <span class="date"><%= note.created_at %></span>
+    </div>
+    <br>
+    <% if current_user.id == note.user_id %>
+    <div class="actions">
+      <%= link_to "Edit",edit_course_coursetextbook_note_path(@course,@coursetextbook, note)    %>|
+      <%= link_to "Delete",course_coursetextbook_note_path(@course,@coursetextbook, note) ,method: :delete ,  data: { confirm: 'Are you sure?' }, :remote => true %>
+    </div>
+  <% end %>
+  </div>
+</div>
+

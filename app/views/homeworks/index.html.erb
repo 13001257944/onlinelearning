@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>作業分享</h1>
+<br>
 
 <!-- <tr>
   <th>課程單元</th>
@@ -32,38 +33,54 @@
     </div>
   </div>
 </div> -->
-<table class="ui celled padded table">
+<table class="ui celled structured table">
   <thead>
-    <tr><th class="single line">分享人</th>
-    <th>檔案</th>
-    <th>建立時間</th>
-    <th>作業描述</th>
-    <th>說明</th>
-  </tr></thead>
+    <tr>
+      <th class="single line">作業名稱</th>
+      <th>描述</th>
+      <th>分享人</th>
+      <th>檔案</th>
+      <th>建立時間</th>
+      <th>說明</th>
+    </tr>
+  </thead>
   <tbody>
-   <% @course.homeworks.each do |homework| %>
-     <% homework.studenthomeworks.each do |studenthomework| %>  
-        <tr>
-          <td>
-            <h4 class="ui center aligned header"><%= studenthomework.user.name %></h4>
-          </td>
-          <td class="single line">
-            <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-          </td>
-          <td class="right aligned">
-            <%= studenthomework.created_at %>
-          </td>
-          <td>
-            <%= homework.description%>
-          </td>                      
-          <td>
-            <%= studenthomework.description %>
-          </td>
-        </tr>
+    <% @course.homeworks.each do |homework| %>
+     <% a = 0 %>
+      <% homework.studenthomeworks.each do |studenthomework| %>
+       <% a=a+1 %>
       <% end %>
-    <% end %>
+      <% if a!=0%>
+       <tr>      
+          <td rowspan="<%= a %>">
+            <%= homework.name %>
+          </td> 
+          <td rowspan="<%= a %>">
+            <%= homework.description.first(15) %>
+          </td>
+            <% homework.studenthomeworks.each do |studenthomework| %>
+                 
+                <td>
+                  <h4 class="left right aligned"><%= studenthomework.user.name %></h4>
+                </td>
+                <td class="right aligned">
+                  <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+                </td>
+                <td class="right aligned">
+                  <%= studenthomework.created_at %>
+                </td>                
+                <td>
+                  <%= studenthomework.description %>
+                </td>
+              </tr>
+            <% end %> 
+      <% end %>   
+    <% end %>    
   </tbody>
 </table>
+
+
+
 <br>
 
 <h4><%= link_to '返回', courses_path %></h4>  

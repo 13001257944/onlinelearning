@@ -1,0 +1,5 @@
+var note = document.createElement("div");
+note.id = "note-<%= @note.id %>";
+note.innerHTML = "<%= j render(:partial => "shared/note",  locals: {note: @note}) %>";
+$("#notelist").append(note);
+$("#notecreate").remove();

@@ -212,7 +212,7 @@
           <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 
         </div>
         <div class="item">
-           <%= link_to('個人學習', selflearn_path(current_user), :class=>"ui button") %>
+           <%= link_to('個人學習', users_path, :class=>"ui button") %>
         </div>
         <!-- <div class="item">
            <%= link_to 'Profile', user_path(current_user), :class=>"ui button" %>
@@ -250,7 +250,7 @@
       <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 
     </div>
     <div class="item">
-       <%= link_to('個人學習', selflearn_path(current_user), :class=>"ui button") %>
+       <%= link_to('個人學習', users_path, :class=>"ui button") %>
     </div>
     <!-- <div class="item">
        <%= link_to 'Profile', user_path(current_user) , :class=>"ui button"%>
@@ -288,7 +288,7 @@
               <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui inverted button") %> 
             </div>
             <div class="item">
-               <%= link_to('個人學習',selflearn_path(current_user), :class=>"ui inverted button") %>
+               <%= link_to('個人學習',users_path, :class=>"ui inverted button") %>
             </div>
             <!-- <div class="item">
                <%= link_to 'Profile', user_path(current_user), :class=>"ui inverted button" %>
