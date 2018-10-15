@@ -9,8 +9,9 @@
     <br>
     <% if current_user.id == note.user_id %>
     <div class="actions">
-      <%= link_to "Edit",edit_course_coursetextbook_note_path(@course,@coursetextbook, note)    %>|
-      <%= link_to "Delete",course_coursetextbook_note_path(@course,@coursetextbook, note) ,method: :delete ,  data: { confirm: 'Are you sure?' }, :remote => true %>
+      <%= link_to "Edit",edit_course_coursetextbook_note_path(@course,@coursetextbook, note) , remote: true  %>|
+        
+      <%= link_to "Delete",course_coursetextbook_note_path(@course,@coursetextbook, note) ,method: :delete ,  data: { confirm: 'Are you sure?' }%>
     </div>
   <% end %>
   </div>

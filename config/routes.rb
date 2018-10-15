@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :selflearns
   
   resources :courses do
-    
+    resources :coursereviews
     resources :homeworks do
       resources :studenthomeworks , only: [:index ,:create, :destroy]
     end

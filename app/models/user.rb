@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :courseregisted_courses, through: :courseregistions, source: :course
   has_many :courseregistions, dependent: :destroy
   has_many :courseusers
+  has_many :coursereviews
   has_many :comments , dependent: :destroy
   has_many :finishcoursetextbooks, dependent: :destroy
   has_many :finished_coursetextbooks, through: :finishcoursetextbooks, source: :coursetextbook

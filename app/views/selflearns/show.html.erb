@@ -1,9 +1,5 @@
-<script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
-<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<%= javascript_include_tag "liquidFillGauge.js" %>
-<%= javascript_include_tag "newchart.js"  %>
-
+<%= javascript_include_tag 'application' %>
+<%= javascript_include_tag "sidebar" %>
 <body class="bg-light">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">個人資料</a></li>
@@ -28,13 +24,7 @@
                  <h2><%= @user.name %></h2>
                  <p><strong><%= @user.email %></strong></p>        
                  <div>
-                   <label for="sex">性別:<% if @user.sex == "1"
-                                                a = "男生"
-                                             elsif @user.sex=="0"
-                                                a= "女生"
-                                             else
-                                                a= "其他"
-                                             end %><%= a %></label>
+                   <label for="sex">性別:<%= user_gender(@user.sex) %></label>
                  </div>
                  <div>
                    <label for="email">Email:<%= @user.email %></label>

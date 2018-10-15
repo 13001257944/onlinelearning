@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  layout"selflearn"
   before_action :authenticate_user!
   before_action :set_course ,:set_coursetextbook ,:set_comment ,:set_homework,:set_courseregistion ,:set_studenthomework
   before_action :set_user, only: [:show, :edit, :update]

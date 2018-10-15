@@ -14,7 +14,7 @@
 <!--           <div><%= simple_format @user.intro %></div>
  -->          
           <div>
-            <label for="sex">性別:<%= @user.sex %></label>
+            <label for="sex">性別:<%= user_gender(@user.sex) %></label>
           </div>
           <div>
             <label for="email">Email:<%= @user.email %></label>

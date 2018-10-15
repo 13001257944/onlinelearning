@@ -2,11 +2,6 @@
 
 <h1>課程單元</h1>
 
-<!-- <tr>
-  <th>課程單元</th>
-  <th colspan="3"></th>
-</tr> -->
-
 <% i=0 %>
 <% inx=0 %>
 <% @course.coursetextbooks.each do |coursetextbook| %>
@@ -63,6 +58,16 @@
     <p> <%= link_to "公開作業" ,course_homeworks_path(@course)  %></p>
   </div>
 <h1>課後心得</h1>
+  <% count = 0 %>
+  <% @course.coursereviews.each do |coursereview| %>
+    <% if coursereview.user_id == current_user.id %>
+      <% count = count+1 %>
+    <% end %>
+  <% end %>
+  <div class="ui clearing segment">
+    <p> <%= link_to "課後問卷" ,course_coursereviews_path(@course,@user)  %></p>
+  </div>
+  
  
 
 <br>
@@ -71,5 +76,8 @@
     <%= link_to '新增課程', new_course_coursetextbook_path %>|
     <%= link_to '新增作業', new_course_homework_path %>|
   <% end -%>
+  <% if count == 0 %>
+    <%= link_to '新增心得', new_course_coursereview_path %>
+  <% end %>
   <%= link_to '返回', courses_path %>
 </h4>

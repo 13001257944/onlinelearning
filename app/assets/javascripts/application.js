@@ -22,5 +22,8 @@
 //= require semantic-ui
 //= require semantic-ui/modal
 //= require semantic-ui/dropdown
-//= require turbolinks
+//= require sidebar
+//= require notebar
+//= require newchart
+//= require liquidFillGauge
 //= require_tree .

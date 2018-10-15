@@ -1,0 +1,109 @@
+<h1>課後問卷與心得</h1>
+<div class="form container">
+  <div class="row">
+   <%= form_for [@course, @coursereview ] do |f| %>
+    <div class="form-group">
+      <h4 class="mb-3">問卷公開與否</h4>
+      <div class="d-block my-3">
+        <div class="custom-control custom-radio">
+          <%= f.radio_button :status, "公開" ,:class=>"custom-control-input",:checked =>true ,:required => true %>
+          <%= f.label :status, "公開" %>
+        </div>
+        <div class="custom-control custom-radio">
+          <%= f.radio_button :status, "不公開" ,:class=>"custom-control-input",:checked =>false ,:required => true %>
+          <%= f.label :status, "不公開" %>
+        </div>
+      </div>
+    </div>
+
+    <h2>課程設計</h2>
+    <div class="form-group">
+      <h4 class="mb-3">1.課程整體設計對於提升程式語言能力有幫助</h4>
+       <%= f.select :course_helpful,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]])%>
+    </div>
+    <div class="form-group">
+      <h4 class="mb-3">2.課程整體設計難度是否適中</h4>
+       <%= f.select :course_easy,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    <div class="form-group">
+      <h4 class="mb-3">3.課程整體設計是否容易學習</h4>
+       <%= f.select :course_learn,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    <h2>概念圖教材設計</h2>
+    <div class="form-group">
+      <h4 class="mb-3">1.概念圖教材設計相較於傳統文字教材對於提升程式語言能力有幫助</h4>
+       <%= f.select :cmap_helpful,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    <div class="form-group">
+      <h4 class="mb-3">2..概念圖教材設計相較於傳統文字教材呈現更容易閱讀</h4>
+       <%= f.select :cmap_read,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1] ]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">3.概念圖教材設計相較於傳統文字教材對於程式語言學習有幫助</h4>
+       <%= f.select :cmap_learn,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    <h2>同儕學習</h2>
+    <div class="form-group">
+      <h4 class="mb-3">1.閱讀同儕作業內容對於程式語言學習有幫助</h4>
+       <%= f.select :studenthomework_helpful,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">2.閱讀同儕筆記對於程式語言學習有幫助</h4>
+       <%= f.select :studentnote_helpful,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">3.閱讀同儕課後心得對於學習程式語言更有動力學習</h4>
+       <%= f.select :studentreview_helpful,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    <h2>線上學習</h2>
+    <div class="form-group">
+      <h4 class="mb-3">1.線上學習相較於實體授課更容易學習程式語言</h4>
+       <%= f.select :onlinelearning_heipful,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    <h2>系統設計</h2>
+    <div class="form-group">
+      <h4 class="mb-3">1.系統的使用介面簡單、容易操作</h4>
+       <%= f.select :system_interface_easy,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">2.系統的功能清楚</h4>
+       <%= f.select :system_function,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">3.系統提供的功能能靈活運用</h4>
+       <%= f.select :system_easyuse,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">4.留言評論功能能促進同儕學習</h4>
+       <%= f.select :system_friend_interact,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">5.透過系統的作品觀摩是否能增進同儕學習</h4>
+       <%= f.select :system_friend_relationship,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+
+    <div class="form-group">
+      <h4 class="mb-3">6.整體而言,對於使用此系統的經驗是感到滿意的</h4>
+       <%= f.select :system_overall,options_for_select([['非常同意', 5], ['同意', 4],['沒意見', 3],['不同意', 2],['非常不同意', 1]]) %>
+    </div>
+    
+    <div class="form-group" id="content1">
+      課後心得:<br><%= f.text_area :review, placeholder: '內容' ,:id => 'content2' ,:class =>'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <%= f.submit class: "btn btn-primary" %>
+      <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+    </div>
+  <% end %>
+  </div>
+</div>
+
+

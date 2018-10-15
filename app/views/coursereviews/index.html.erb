@@ -1,23 +1,4 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Name:</strong>
-  <%= @course.name %>
-</p>
-
-<p>
-  <strong>Photo:</strong>
-  <%= image_tag @course.photo.url , width: '300px', height:'200px' if @course.photo?%>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= simple_format(@course.description) %>
-</p>
-
-<p>
-  <strong>課後心得</strong>
-  <table class="ui celled structured table">
+<table class="ui celled structured table">
   <thead>
     <tr>
       <th class="single line">課程名稱</th>
@@ -83,13 +64,8 @@
   </tbody>
 </table>
 
-</p>
 
 
-<% if current_user.id == @course.user_id %>
-  <%= link_to '編輯課程', edit_course_path(@course) %> |
-  <%= link_to '進入課程教材', course_coursetextbooks_path(@course) %>
-<% end %>
-<%= link_to '返回', courses_path %>
+<br>
 
-
+<h4><%= link_to '返回', course_coursetextbooks_path %></h4>  

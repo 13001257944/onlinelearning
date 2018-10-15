@@ -13,6 +13,7 @@ class StudenthomeworksController < ApplicationController
       @studenthomework = @homework.studenthomeworks.build(studenthomework_params)
       @studenthomework.user = current_user
       @studenthomework.save!
+      
   end
   def destroy
     @course = Course.find(params[:course_id])

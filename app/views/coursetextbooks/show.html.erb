@@ -1,81 +1,24 @@
+<style>
+  body >.ui.right.sidebar{
+    background-color: #FFC863 
+  }
+  .ui.secondary.toggle.button{
+    float: right;
+  }
+
+</style>
+
 <body class="bg-light">
-  <ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#home">課程內容</a></li>
-    <li><a data-toggle="tab" href="#menu1">個人筆記</a></li>
-    <li><a data-toggle="tab" href="#menu2">同學筆記</a></li>
-  </ul>
-  <br>
-  <div class="tab-content">
-    <div id="home" class="tab-pane fade in active "> 
-      <p><%= notice %></p>
-      <p>
-        <h1><strong><%= @coursetextbook.title %></strong></h1>
-      </p>
-
-      <p>
-        <strong>Teacher</strong>
-        <%= @coursetextbook.course.id %>
-      </p>
-
-      <p>
-        <%=raw @coursetextbook.body %>
-      </p>
-      <% if @coursetextbook.code == "Ruby" %>
-        <h1 style="font-style: italic;"><span style="background-color:#FFFFE0;">程式練習</span></h1>
-        <p><iframe allowfullscreen="true" allowtransparency="true" frameborder="no" height="400px" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" scrolling="no" src="https://repl.it/@z1z1z1joey/TurbulentGentleGraph?lite=true" width="100%"></iframe></p>
-      <% end %>
-      <% if @coursetextbook.is_finished?(current_user) %>
-        尚未完成單元學習，請點擊按鈕-NotFinish
-        <p> 
-          <%= link_to 'Notfinish', notfinish_course_coursetextbook_path(@course,@coursetextbook), method: :post, class: "btn btn-info" %>
-        </p>
-      <% else %>
-        完成單元學習，請點擊按鈕-Finish
-        <p>
-          <%= link_to 'Finish', finish_course_coursetextbook_path(@course,@coursetextbook), method: :post, class: "btn btn-primary" %>
-        </p> 
-      <% end %>
-
-
-
-      <p>
-        <% if current_user.id == @course.user_id %>
-          <%= link_to '編輯教材', edit_course_coursetextbook_path(@course,@coursetextbook) %> 
-        <% end %>
-        <%= link_to '返回', course_coursetextbooks_path %>
-      </p>
-      <div class="ui comments">
-        <h3 class="ui dividing header">留言板</h3>
-        <div>
-          <div id="commentlist">
-            <% @coursetextbook.comments.each do |comment| %>     
-                <div id="comment-<%= comment.id %>">
-                  <%= render partial: "shared/comment", locals: {comment: comment} %>
-                </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="container">
-          <div class="row">
-           <%= form_for [@course,@coursetextbook, @comment], { remote: true }  do |f| %>
-            <div class="form-group">
-              <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
-            </div>
-            <div class="form-group">
-              <%= f.submit class: "btn btn-primary" %>
-              <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
-            </div>
-          <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
-          
-    <div id="menu1" class="tab-pane fade left">
-      <div class="form container">
+  <div class="ui right wide sidebar vertical inverted fixed overlay">
+     <div>
+      <br>
+      <br>
+      <br>
+      <br>
+       <div class="form container">
         <h3 class="ui dividing header">課堂筆記</h3>
         <div>
-          <div id="notelist">
+          <div class="notelist">
             <% count=0 %>
             <% @coursetextbook.notes.each do |note| %> 
               <% if note.user_id == current_user.id && note.coursetextbook_id== @coursetextbook.id%>    
@@ -90,7 +33,7 @@
         <br>
         <br>
         <%if count == 0%>
-          <div class="container" id="notecreate">
+          <div class="container notecreate">
             <div class="row">
               <div class="note" >
                 <%= form_for [@course,@coursetextbook, @note], { remote: true }  do |f| %>
@@ -109,7 +52,147 @@
                     </div>
                   </div>
                   <div class="form-group" id="content1">
-                    筆記內容:<br><%= f.cktext_area :content, placeholder: '筆記內容' ,:id => 'content2' ,:class =>'form-control'  %>
+                    筆記內容:<br><%= f.text_area :content, placeholder: '筆記內容' ,:id => 'content2' ,:class =>'form-control',style: 'height: 100px; width: 150px'  %>
+                  </div>
+
+                  
+                  <div class="form-group">
+                    <%= f.submit class: "btn btn-primary" %>
+                    <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+     </div>
+  </div>
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">課程內容</a></li>
+    <!-- <li><a data-toggle="tab" href="#menu1">個人筆記</a></li> -->
+    <li><a data-toggle="tab" href="#menu2">同學筆記</a></li>
+  </ul>
+
+  
+  <br>
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active "> 
+      <div class="container">
+        <p><%= notice %></p>
+        <p>
+          <h1><strong><%= @coursetextbook.title %></strong></h1>
+          <div class="ui secondary labeled icon toggle button">
+            <i class="right arrow icon"></i>
+            寫筆記
+          </div>
+        </p>
+        
+        
+        
+        <p>
+          <strong>Teacher</strong>
+          <%= @coursetextbook.course.user.name %>
+        </p>
+
+        <p>
+          <%=raw @coursetextbook.body %>
+        </p>
+        <% if @coursetextbook.code == "Ruby" %>
+          <h1 style="font-style: italic;"><span style="background-color:#FFFFE0;">程式練習</span></h1>
+          <p><iframe allowfullscreen="true" allowtransparency="true" frameborder="no" height="400px" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" scrolling="no" src="https://repl.it/@z1z1z1joey/TurbulentGentleGraph?lite=true" width="100%"></iframe></p>
+        <% end %>
+        <% if @coursetextbook.is_finished?(current_user) %>
+          <h3>尚未完成單元學習，請點擊按鈕-NotFinish</h3>
+          <p> 
+            <%= link_to 'Notfinish', notfinish_course_coursetextbook_path(@course,@coursetextbook), method: :post, class: "btn btn-info" %>
+          </p>
+
+        <% else %>
+          <h3>完成單元學習，請點擊按鈕-Finish</h3>
+          <p>
+            <%= link_to 'Finish', finish_course_coursetextbook_path(@course,@coursetextbook), method: :post, class: "btn btn-primary" %>
+          </p> 
+        <% end %>
+
+
+
+        <p>
+          <% if current_user.id == @course.user_id %>
+            <%= link_to '編輯教材', edit_course_coursetextbook_path(@course,@coursetextbook) %> 
+          <% end %>
+          <%= link_to '返回', course_coursetextbooks_path %>
+        </p>
+        <br>
+        <br>
+
+        <div class="ui comments">
+          <h3 class="ui dividing header">留言板</h3>
+          <div>
+            <div id="commentlist">
+              <% @coursetextbook.comments.each do |comment| %>     
+                  <div id="comment-<%= comment.id %>">
+                    <%= render partial: "shared/comment", locals: {comment: comment} %>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="container">
+            <div class="row">
+             <%= form_for [@course,@coursetextbook, @comment], { remote: true }  do |f| %>
+              <div class="form-group">
+                <%= f.text_area :content, placeholder: "留個言吧", class: "form-control" %>
+              </div>
+              <div class="form-group">
+                <%= f.submit class: "btn btn-primary" %>
+                <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+              </div>
+            <% end %>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+          
+    <!-- <div id="menu1" class="tab-pane fade left">
+      <div class="form container">
+        <h3 class="ui dividing header">課堂筆記</h3>
+        <div>
+          <div class="notelist">
+            <% count=0 %>
+            <% @coursetextbook.notes.each do |note| %> 
+              <% if note.user_id == current_user.id && note.coursetextbook_id== @coursetextbook.id%>    
+                <% count = count+1 %>
+                <div class="note-<%= note.id %>">
+                  <%= render partial: "shared/note", locals: {note: note} %>
+                </div>
+              <% end %>
+             <% end %>
+          </div>
+        </div>
+        <br>
+        <br>
+        <%if count == 0%>
+          <div class="container notecreate">
+            <div class="row">
+              <div class="note" >
+                <%= form_for [@course,@coursetextbook, @note], { remote: true }  do |f| %>
+                  
+                  <div class="form-group">
+                    <h4 class="mb-3">筆記狀態</h4>
+                    <div class="d-block my-3">
+                      <div class="custom-control custom-radio">
+                        <%= f.radio_button :status, "公開" ,:class=>"custom-control-input",:checked =>true ,:required => true %>
+                        <%= f.label :status, "公開" %>
+                      </div>
+                      <div class="custom-control custom-radio">
+                        <%= f.radio_button :status, "不公開" ,:class=>"custom-control-input",:checked =>false ,:required => true %>
+                        <%= f.label :status, "不公開" %>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="form-group" id="content1">
+                    筆記內容:<br><%= f.text_area :content, placeholder: '筆記內容' ,:id => 'content2' ,:class =>'form-control'  , width: "100px"%>
                   </div>
 
                   
@@ -124,7 +207,7 @@
         <% end %>
       </div>
     </div>
-   
+    -->
 
     <div id="menu2" class="tab-pane fade right">
       <div class="container">

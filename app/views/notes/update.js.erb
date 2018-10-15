@@ -1,2 +1,2 @@
-<% html = j( render :partial => "noteform", :locals => { :note => @note } ) %>
-$("#notetext").html("<%= html %>")
+<% html = j( render :partial => "shared/note", :locals => { :note => @note } ) %>
+$("#note-<%= @note.id %>").html("<%= html %>")

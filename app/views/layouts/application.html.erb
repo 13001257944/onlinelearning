@@ -7,9 +7,26 @@
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
     
-
-
-    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    
+    <script>
+      var w = 350;
+      var _w = $(window).width();
+      $(function(){
+      if(_w <= 480){
+      var ifrs = document.getElementsByTagName('iframe');
+      for(var i=0;i<ifrs.length;i++){
+      var ifr = ifrs[i];
+      var a = ifr.src;
+      if(a.indexOf('https://www.facebook.com/') == -1) continue;
+      var b = a.indexOf('&width=');
+      var c = a.substring(0, b + 7);
+      var d = c + w;
+      ifr.src = d;
+      ifr.width = w;
+      }
+      }
+      });
+    </script> 
     <style type="text/css">
       body {
         background-color: #FAFAFA;
@@ -108,116 +125,20 @@
           font-size: 1.5em;
         }
       }
-      @media (max-width: 480px) {
+      @media (max-width: 800px) {
           iframe[src *= "youtube"]{
-              max-width:360px;
-              height: 197px;
+              max-width:400px;
+              height: 210px;
           }
       }
     </style>
-    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
-    <script type="text/javascript" src = "https://semantic-ui.com/examples/assets/library/jquery.min.js"></script>
-    <script>
-      // $(document).ready(function() {
-          // $('.special.card .image').dimmer({ on: 'hover' });
-          // $('.star.rating').rating();
-          // $('.card .dimmer').dimmer({ on: 'hover' });
-          
-          // $('.masthead')
-          //   .visibility({
-          //     once: false,
-          //     onBottomPassed: function() {
-          //       $('.fixed.menu').transition('fade in');
-          //     },
-          //     onBottomPassedReverse: function() {
-          //       $('.fixed.menu').transition('fade out');
-          //     }
-          //   })
-          // ;
-
-          // $('.ui.form')
-  //           .form({
-  //             fields: {
-  //               email: {
-  //                 identifier  : 'email',
-  //                 rules: [
-  //                   {
-  //                     type   : 'empty',
-  //                     prompt : 'Please enter your e-mail'
-  //                   },
-  //                   {
-  //                     type   : 'email',
-  //                     prompt : 'Please enter a valid e-mail'
-  //                   }
-  //                 ]
-  //               },
-  //               password: {
-  //                 identifier  : 'password',
-  //                 rules: [
-  //                   {
-  //                     type   : 'empty',
-  //                     prompt : 'Please enter your password'
-  //                   },
-  //                   {
-  //                     type   : 'length[6]',
-  //                     prompt : 'Your password must be at least 6 characters'
-  //                   }
-  //                 ]
-  //               }
-  //             }
-  //           })
-  //         ;
-  // });
-
-          // create sidebar and attach to menu open
-          $(document)
-            .ready(function() {
-              // fix menu when passed
-              $('.masthead')
-                .visibility({
-                  once: false,
-                  onBottomPassed: function() {
-                    $('.fixed.menu').transition('fade in');
-                  },
-                  onBottomPassedReverse: function() {
-                    $('.fixed.menu').transition('fade out');
-                  }
-                })
-              ;
-
-              // create sidebar and attach to menu open
-              $('.ui.sidebar')
-                .sidebar('attach events', '.toc.item')
-              ;
-            });
-        var w = 350;
-        var _w = $(window).width();
-        $(function(){
-        if(_w <= 480){
-        var ifrs = document.getElementsByTagName('iframe');
-        for(var i=0;i<ifrs.length;i++){
-        var ifr = ifrs[i];
-        var a = ifr.src;
-        if(a.indexOf('https://www.facebook.com/') == -1) continue;
-        var b = a.indexOf('&width=');
-        var c = a.substring(0, b + 7);
-        var d = c + w;
-        ifr.src = d;
-        ifr.width = w;
-        }
-        }
-        });
-
-    </script> 
- </head>
-
- 
+  </head>
 
   <body>
     <div class="ui large top fixed menu transition hidden">
       <div class="ui container">
-        <a class="navbar-brand" href="/courses">程式教學平台</a>
+        <!-- <a class="navbar-brand" href="/courses">程式教學平台</a> -->
+        <%= link_to('程式教學平台', "courses#index", method: :delete ,:class=>"navbar-brand") %> 
         <a class="active item">課程瀏覽</a>
         <a class="item">起源</a>
         <a class="item">學習分享</a>
@@ -248,7 +169,7 @@
     </div>
 
     <!-- Sidebar Menu -->
-    <div class="ui vertical inverted sidebar menu left">
+    <div class="ui left vertical inverted sidebar menu ">
       <a class="navbar-brand" href="/courses">程式教學平台</a>
       <a class="active item">課程瀏覽</a>
       <a class="item">起源</a>   
@@ -263,9 +184,6 @@
         <div class="item">
            <%= link_to('個人學習', users_path, :class=>"ui button") %>
         </div>
-        <!-- <div class="item">
-               <%= link_to 'Profile', user_path(current_user), :class=>"ui button" %>
-            </div> -->
       <% else %>
         <div class="item">
           <%= link_to('註冊', new_user_registration_path, :class=>"ui primary button") %>
@@ -273,8 +191,7 @@
         <div class="item">
            <%= link_to('登入', new_user_session_path, :class=>"ui button") %>
         </div>                
-      <% end %>
-      
+      <% end %>      
     </div>
 
     <!-- Page Contents -->
@@ -319,8 +236,10 @@
         <%= yield %>
       </div>  
     </div>
+    <div></div>  
     <div class="ui inverted vertical footer segment">
          <center> Copyright © 2018   |  NTUST. SIS-LAB. </center>
     </div>
+
   </body> 
 </html>

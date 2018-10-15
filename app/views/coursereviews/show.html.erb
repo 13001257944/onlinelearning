@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1">
+       <!-- page-header 裡面顯示個人檔案資料 -->
+      <div class="page-header">
+         <div class="col-md-3 col-sm-4">
+          <div class="text-center">
+            <%= image_tag @course.photo, class: "img-responsive img-rounded" %>
+          </div>
+        </div>
+         <div class="col-md-9 col-sm-8">
+          <h2>課程名稱：<%= @course.name %></h2>
+          <p><strong>授課老師：<%= @course.user.name %></strong></p>
+        
+       <br>
+       <div class="row">
+        <div class="col-md-8 order-md-1">
+          <h2 class="mb-3">課後問卷與心得</h2>
+          
+          <div class="mb-3">
+            <h4 for="intro">問卷公開與否</h4>
+            <div><%=  %></div> 
+          </div>
+          <br>
+          
+          <h3>課程設計</h3>
+
+          <h4 class="mb-3">1.課程整體設計對於提升程式語言能力有幫助</h4>
+          <%= coursereview_agree(@coursereview.course_helpful) %>
+          <h4 class="mb-3">2.課程整體設計難度是否適中</h4>
+          <%= coursereview_agree(@coursereview.course_easy) %>
+          <h4 class="mb-3">3.課程整體設計是否容易學習</h4>
+          <%= coursereview_agree(@coursereview.course_learn) %>
+
+          <h3>概念圖教材設計</h3>
+
+          <h4 class="mb-3">1.概念圖教材設計相較於傳統文字教材對於提升程式語言能力有幫助</h4>
+          <%= coursereview_agree(@coursereview.cmap_helpful) %>
+          <h4 class="mb-3">2.概念圖教材設計相較於傳統文字教材呈現更容易閱讀</h4>
+          <%= coursereview_agree(@coursereview.cmap_read) %>
+          <h4 class="mb-3">3.概念圖教材設計相較於傳統文字教材對於程式語言學習有幫助</h4>
+          <%= coursereview_agree(@coursereview.cmap_learn) %>
+
+          <h3>同儕學習</h3>
+
+          <h4 class="mb-3">1.閱讀同儕作業內容對於程式語言學習有幫助</h4>
+          <%= coursereview_agree(@coursereview.studenthomework_helpful) %>
+          <h4 class="mb-3">2.閱讀同儕筆記對於程式語言學習有幫助</h4>
+          <%= coursereview_agree(@coursereview.studentnote_helpful) %>
+          <h4 class="mb-3">3.閱讀同儕課後心得對於學習程式語言更有動力學習</h4>
+          <%= coursereview_agree(@coursereview.studentreview_helpful) %>
+
+          <h3>線上學習</h3>
+
+          <h4 class="mb-3">1.線上學習相較於實體授課更容易學習程式語言</h4>
+          <%= coursereview_agree(@coursereview.onlinelearning_heipful) %>
+         
+         <h3>系統設計</h3>
+
+          <h4 class="mb-3">1.系統的使用介面簡單、容易操作</h4>
+          <%= coursereview_agree(@coursereview.system_interface_easy) %>
+          <h4 class="mb-3">2.系統的功能清楚</h4>
+          <%= coursereview_agree(@coursereview.system_function) %>
+          <h4 class="mb-3">3.系統提供的功能能靈活運用</h4>
+          <%= coursereview_agree(@coursereview.system_easyuse) %>
+          <h4 class="mb-3">4.留言評論功能能促進同儕學習</h4>
+          <%= coursereview_agree(@coursereview.system_friend_interact) %>
+          <h4 class="mb-3">5.透過系統的作品觀摩是否能增進同儕學習</h4>
+          <%= coursereview_agree(@coursereview.system_friend_relationship) %>
+          <h4 class="mb-3">6.整體而言,對於使用此系統的經驗是感到滿意的</h4>
+          <%= coursereview_agree(@coursereview.system_overall) %>
+          <h3><%= link_to '返回', course_coursetextbooks_path %></h3>
+        </div>
+
+        
+          
+     
+           
+       
+      </div>
+     </div>
+  </div>
+</div>
+
+

@@ -1,7 +1,7 @@
 class NotesController < ApplicationController
   before_action :set_course 
   before_action :set_coursetextbook 
-  before_action :set_note ,only:[:destroy,:update,:show]
+  before_action :set_note ,only:[:destroy,:update,:show,:edit]
   before_action :authenticate_user!
 
 
@@ -18,13 +18,13 @@ class NotesController < ApplicationController
     if current_user.id == @note.user_id
       @note.destroy
       redirect_to course_coursetextbook_path(@course,@coursetextbook)
+
     end
   end
 
   def update
     if current_user.id == @note.user_id
       if @note.update_attributes(note_params)
-        redirect_to course_coursetextbook_path(@course,@coursetextbook)
       else
         render :action => :edit
       end
@@ -32,7 +32,6 @@ class NotesController < ApplicationController
   end
 
   def edit
-    @note = Note.find(params[:id])
   end
 
   private
