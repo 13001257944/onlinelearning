@@ -7,7 +7,12 @@ Rails.application.routes.draw do
   resources :courses do
     resources :coursereviews
     resources :homeworks do
-      resources :studenthomeworks , only: [:index ,:create, :destroy]
+      resources :studenthomeworks , only: [:index ,:create, :destroy] do
+        member do
+          post :favorite
+          post :unfavorite
+        end
+      end
     end
     member do
       post :courseregistion

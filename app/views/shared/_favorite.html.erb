@@ -1,0 +1,7 @@
+<% if studenthomework.user_id != current_user %>
+  <% if studenthomework.is_favorited?(current_user) %>
+    <%= link_to '不收藏', unfavorite_course_homework_studenthomework_path(@course,@homework,studenthomework), method: :post, class: "btn btn-primary" %>
+  <% else %>
+    <%= link_to '收藏', favorite_course_homework_studenthomework_path(@course,@homework,studenthomework), method: :post, class: "btn btn-primary" %>
+  <% end %>
+<% end %>

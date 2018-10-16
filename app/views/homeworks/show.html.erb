@@ -63,7 +63,10 @@
                       </div>
                       <div class="text">
                         <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
+                        <%= render partial: "shared/favorite", locals: {studenthomework: studenthomework} %>
+
                       </div>
+
                       <hr>
                     </div>
                   </div>

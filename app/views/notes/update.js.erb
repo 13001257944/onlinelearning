@@ -1,2 +1,3 @@
 <% html = j( render :partial => "shared/note", :locals => { :note => @note } ) %>
-$("#note-<%= @note.id %>").html("<%= html %>")
+$("#note-<%= @note.id %>-2").html("<%= html %>");
+$("#note-<%= @note.id %>-1").html("<%= html %>");

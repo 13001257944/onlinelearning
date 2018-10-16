@@ -9,6 +9,9 @@ class User < ApplicationRecord
   has_many :studenthomeworks
   has_many :courses, :through => :courseregistions
   has_many :notes , dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_studenthomeworks, through: :favorites, source: :studenthomework
+
   mount_uploader :avatar, AvatarUploader
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

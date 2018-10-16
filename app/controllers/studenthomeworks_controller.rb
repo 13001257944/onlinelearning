@@ -22,6 +22,19 @@ class StudenthomeworksController < ApplicationController
     end
   end
 
+  def favorite
+    @studenthomework = Studenthomework.find(params[:id])
+    @studenthomework.favorites.create!(user: current_user)
+    redirect_back(fallback_location: root_path)  # 導回上一頁
+  end
+
+  def unfavorite
+    @studenthomework = Studenthomework.find(params[:id])
+    favorites = Favorite.where(studenthomework: @studenthomework, user: current_user)
+    favorites.destroy_all
+    redirect_back(fallback_location: root_path)
+  end
+
   private
 
   def authenticate_admin

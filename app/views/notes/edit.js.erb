@@ -1,3 +1,5 @@
 <% html = j( render :partial => "shared/noteform", locals: {note: @note} ) %>
-var note_tds = $("#note-<%= @note.id %>").children();
+var note_tdss = $("#note-<%= @note.id %>-2").children();
+$(note_tdss[0]).html("<%= html %>");
+var note_tds = $("#note-<%= @note.id %>-1").children();
 $(note_tds[0]).html("<%= html %>");

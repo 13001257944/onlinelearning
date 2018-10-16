@@ -1,15 +1,26 @@
 <style>
   body >.ui.right.sidebar{
-    background-color: #FFC863 
+    background-color: #FFC863 ;
   }
   .ui.secondary.toggle.button{
     float: right;
   }
 
 </style>
+<script>
+  CKEDITOR.editorConfig = function (config) {
+
+  config.height = 280;
+
+  config.width = 440;
+
+  config.removePlugins = 'elementspath';config.removePlugins = 'elementspath';
+
+  }
+</script>
 
 <body class="bg-light">
-  <div class="ui right wide sidebar vertical inverted fixed overlay">
+  <div class="ui right very wide sidebar vertical inverted fixed overlay">
      <div>
       <br>
       <br>
@@ -23,7 +34,7 @@
             <% @coursetextbook.notes.each do |note| %> 
               <% if note.user_id == current_user.id && note.coursetextbook_id== @coursetextbook.id%>    
                 <% count = count+1 %>
-                <div id="note-<%= note.id %>">
+                <div id="note-<%= note.id %>-1">
                   <%= render partial: "shared/note", locals: {note: note} %>
                 </div>
               <% end %>
@@ -51,8 +62,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group" id="content1">
-                    筆記內容:<br><%= f.text_area :content, placeholder: '筆記內容' ,:id => 'content2' ,:class =>'form-control',style: 'height: 100px; width: 150px'  %>
+                  <div class="form-group" >
+                    筆記內容:<br><%= f.cktext_area :content, placeholder: '筆記內容'  ,:class =>'form-control' %>
                   </div>
 
                   
@@ -68,6 +79,7 @@
       </div>
      </div>
   </div>
+  
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">課程內容</a></li>
     <!-- <li><a data-toggle="tab" href="#menu1">個人筆記</a></li> -->
@@ -154,7 +166,7 @@
       </div>  
     </div>
           
-    <!-- <div id="menu1" class="tab-pane fade left">
+   <!--  <div id="menu1" class="tab-pane fade left">
       <div class="form container">
         <h3 class="ui dividing header">課堂筆記</h3>
         <div>
@@ -163,7 +175,7 @@
             <% @coursetextbook.notes.each do |note| %> 
               <% if note.user_id == current_user.id && note.coursetextbook_id== @coursetextbook.id%>    
                 <% count = count+1 %>
-                <div class="note-<%= note.id %>">
+                <div id="note-<%= note.id %>-2">
                   <%= render partial: "shared/note", locals: {note: note} %>
                 </div>
               <% end %>
@@ -191,8 +203,8 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form-group" id="content1">
-                    筆記內容:<br><%= f.text_area :content, placeholder: '筆記內容' ,:id => 'content2' ,:class =>'form-control'  , width: "100px"%>
+                  <div class="form-group" >
+                    筆記內容:<br><%= f.cktext_area :content, placeholder: '筆記內容',:class =>'form-control' %>
                   </div>
 
                   
@@ -206,8 +218,8 @@
           </div>
         <% end %>
       </div>
-    </div>
-    -->
+    </div> -->
+   
 
     <div id="menu2" class="tab-pane fade right">
       <div class="container">
@@ -243,5 +255,5 @@
 
   </div>
 
-
+  
 </body>
