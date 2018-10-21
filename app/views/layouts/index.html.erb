@@ -192,7 +192,7 @@
       <a class="navbar-brand" href="/courses">程式教學平台</a>
       <a class="active item">課程瀏覽</a>
       <a class="item">起源</a>   
-      <a class="item">學習分享</a>
+      <a class="item" href="/share_learns">學習分享</a>
       <% if current_user %>
         <div class="item">
           Hi, <%= current_user.sex %>
@@ -224,7 +224,7 @@
             <a class="header item" href="/courses">程式教學平台</a>
             <a class="active item">課程瀏覽</a>
             <a class="item">起源</a>
-            <a class="item">學習分享</a>
+            <a class="item" href="/share_learns">學習分享</a>
             <div class="right item">
               <% if current_user %>
                 <div class="item">
@@ -255,7 +255,7 @@
             Imagine-Your-World.
           </h1>
           <h2>Do whatever it takes.拼盡全力</h2>
-          <div class="ui huge primary button">Get Started <i class="right arrow icon"></i></div>
+          <a class="ui huge primary button" href = "/courses">Get Started <i class="right arrow icon"></i></a>
         </div>
       </div>   
       <div class="ui vertical stripe segment container">

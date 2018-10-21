@@ -1,0 +1,34 @@
+<div class="form container">
+  <%= form_with(model: share_learn, local: true) do |form| %>
+    <% if share_learn.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(share_learn.errors.count, "error") %> prohibited this course from being saved:</h2>
+
+        <ul>
+        <% share_learn.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <%= form.label :title %>
+      <%= form.text_field :title, id: :share_learn_title , class: "form-control" %>
+    </div>
+
+    
+              
+
+    
+
+    <div class="form-group">
+      <%= form.label :content %>
+      <%= form.cktext_area :content, id: :share_content , class: "form-control" %>
+    </div>
+
+    <div class="form-group">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</div>

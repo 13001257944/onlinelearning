@@ -1,0 +1,32 @@
+<div class="container">
+        <p><%= notice %></p>
+        <p>
+          <h1><strong><%= @share_learn.title %></strong></h1>
+          
+        </p>
+        
+        
+        
+        <p>
+          <strong>分享者</strong>
+          <%= @share_learn.user.name %>
+        </p>
+
+        <p>
+          <%=raw @share_learn.content %>
+        </p>
+        
+
+
+
+        <p>
+          <% if current_user.id == @share_learn.user_id %>
+            <%= link_to '編輯內容', edit_share_learn_path(@share_learn) %> 
+          <% end %>
+          <%= link_to '返回', share_learns_path %>
+        </p>
+        <br>
+        <br>
+
+       
+      </div>  

@@ -7,6 +7,7 @@
         <li><a data-toggle="tab" href="#menu2">個人作品集</a></li>
         <li><a data-toggle="tab" href="#menu3">個人筆記本</a></li>
         <li><a data-toggle="tab" href="#menu4">收藏</a></li>
+        <li><a data-toggle="tab" href="#menu5">班級狀況</a></li>
       </ul>
       <br>
       <div class="tab-content">
@@ -88,21 +89,32 @@
               <th>作業完成率</th>
               <th>課程完成率</th>
               <th>留言次數</th>
+              <th>學習狀態</th>
             </tr></thead>
+              
+               
             <tbody>
               <% inx = 0%>
               <% @courses.each do |course| %>
+                <% course_peoplecount = 0 %>
+                <% course.courseregistions.each do |courseregistion| %>
+                  <% course_peoplecount +=1 %>
+                <% end %>
+                  
                 <% course.courseregistions.each do |courseregistion| %>
                   <% if courseregistion.user_id == current_user.id%> 
-                    <% a,b,c,d,e,f,g,h = [0,0,0,0,0,0,0,0] %>              
+                    <%b1,e1,c1,f1,g1 = [0,0,0,0,0,0,0,0] %>              
+                    <% a,b,c,d,e,f,g,h,i = [0,0,0,0,0,0,0,0,0] %>              
                     <% course.coursetextbooks.each do |coursetextbook| %> 
                       <% a = a+1 %>
                       <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %> 
+                        <% b1 = b1+1%> 
                         <% if finishcoursetextbook.user_id == current_user.id%> 
                           <% b = b+1%>  
                         <% end %>               
                       <% end %> 
                       <% coursetextbook.comments.each do |comment| %>
+                        <% i = i+1%>
                         <% if comment.user_id == current_user.id%> 
                           <% h = h+1%>
                         <% end %>
@@ -111,6 +123,7 @@
                     <% course.homeworks.each do |homework| %>
                       <% d = d+1%>
                       <% homework.studenthomeworks.each do |studenthomework|%>
+                        <% e1 = e1+1%>
                         <% if studenthomework.user_id == current_user.id%>
                           <% e = e+1%>
                         <% end %>
@@ -122,10 +135,17 @@
                        if d==0 
                          d=1.0
                        end
+                       if course_peoplecount ==0
+                          course_peoplecount =1.0
+                        end
                       c = (b.to_f/a)*100
                       f = (e.to_f/d)*100 
                       g = (((b+e).to_f)/(a+d))*100
                       %>
+                    <%  c1 = (b1.to_f / (a*course_peoplecount))*100 
+                        f1 = (e1.to_f / (d*course_peoplecount))*100 
+                        g1 = (((b1+e1).to_f)/(a*course_peoplecount+d*course_peoplecount))*100
+                    %>
                     <% inx =inx + 1%>
                     
                     <tr>
@@ -144,7 +164,24 @@
                       <td>
                         <svg id="fillgaugeType3_<%= inx %>" width="100" height="100" onload="setChart(3,<%= inx %>,<%= g.round(2) %>)"></svg>
                       </td>
-                      <td><%= h %></td>
+                      <td><%= h %>/<%= i %></td>
+                      <td><%
+                              if g == nil
+                                g =0
+                              end
+                              if g1 == nil
+                                g1 =0
+                              end
+                              k = 0
+                              if g == 100
+                               k="恭喜完成課程！"
+                              elsif g>g1
+                                k="高於平均，繼續保持！"
+                              elsif g==g1
+                               k="同於平均，持續加油！"
+                              else
+                                k="低於平均，有待加強！"
+                              end %><%= k%></td>
                     </tr>
                   <% end %>
                 <% end %>
@@ -159,7 +196,6 @@
             <thead>
               <tr><th class="single line">課程</th>
               <th>作業</th>
-              <th>Efficacy</th>
               <th>作業描述</th>
               <th>說明</th>
             </tr></thead>
@@ -176,10 +212,6 @@
                             </td>
                             <td class="single line">
                               <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-                            </td>
-                            <td class="right aligned">
-                              80% <br>
-                              <a href="#">18 studies</a>
                             </td>
                             <td>
                               <%= homework.description%>
@@ -278,6 +310,74 @@
             </tbody>
           </table>
         </div>
+
+        <div id="menu5" class="tab-pane fade left">
+          <h2>班級狀況</h2>
+          <table class="ui celled padded table">
+            <thead>
+              <tr><th class="single line">課程</th>
+              <th>註冊人數</th>
+              <th>單完平均完成率</th>
+              <th>作業平均完成率</th>
+              <th>課程平均完成率</th>
+              <th>留言次數</th>
+            </tr></thead>
+            <tbody>
+              <% inx1 = 1000 %>
+              <% @courses.each do |course| %>
+               <% course_peoplecount = 0 %>
+               <% if course.user_id == current_user.id%>
+                  <% course.courseregistions.each do |courseregistion| %>
+                    <% course_peoplecount +=1 %>
+                  <% end %>
+                  
+                  <% a1,b1,d1,e1,i1,c1,f1,g1 = [0,0,0,0,0,0,0,0] %>              
+                  <% course.coursetextbooks.each do |coursetextbook| %> 
+                    <% a1 = a1+1 %>
+                    <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %>                        
+                      <% b1 = b1+1%>                                       
+                    <% end %> 
+                    <% coursetextbook.comments.each do |comment| %>
+                      <% i1 = i1+1%>                        
+                    <% end %>
+                  <% end %>
+                  <% course.homeworks.each do |homework| %>
+                    <% d1 = d1+1%>
+                    <% homework.studenthomeworks.each do |studenthomework|%>
+                      <% if studenthomework.user_id == current_user.id%>
+                        <% e1 = e1+1%>
+                      <% end %>
+                    <% end %>               
+                  <% end %>
+
+                  <%  c1 = (b1.to_f / (a1*course_peoplecount))*100 
+                      f1 = (e1.to_f / (d1*course_peoplecount))*100 
+                      g1 = (((b1+e1).to_f)/(a1*course_peoplecount+d1*course_peoplecount))*100
+                  %>
+                  <% inx1 =inx1 + 1%>
+                  
+                  <tr>
+                    <td><%= course.name%></td>
+                    <td><%= course_peoplecount%></td>
+                    <td>        
+                      <svg id="fillgaugeType1_<%= inx1 %>" width="100" height="100" onload="setChart(1,<%= inx1 %>,<%= c1.round(2) %>)"></svg>
+                    </td>         
+                    <td>
+                      <svg id="fillgaugeType2_<%= inx1 %>" width="100" height="100" onload="setChart(2,<%= inx1 %>,<%= f1.round(2) %>)"></svg>
+                    </td>
+                    <td>
+                      <svg id="fillgaugeType3_<%= inx1 %>" width="100" height="100" onload="setChart(3,<%= inx1 %>,<%= g1.round(2) %>)"></svg>
+                    </td>
+                    <td><%= i1 %></td>
+                  </tr>
+               <% end %>
+              <% end %>
+            </tbody>
+          </table>     
+        </div>
+
+
+
       </div>
 
 
@@ -297,3 +397,5 @@
 
   <% end %>
 <% end %>
+
+

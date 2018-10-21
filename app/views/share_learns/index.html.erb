@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>學習分享</h1>
+
+<% i=0 %>
+<% inx=0 %>
+<% @share_learns.each do |share_learn| %> 
+  <% inx = inx+1 %>
+  <div class="ui clearing segment">
+    <p>分享 <%=inx%> : <%= link_to share_learn.title, share_learn_path(share_learn)  %>
+      <% if current_user.id == share_learn.user_id %>
+        <div class=" ui right floated buttons">
+           <td><%= link_to '編輯教材', edit_share_learn_path(share_learn), :class => "ui red basic button" %></td>
+           <td><%= link_to "刪除教材", share_learn_path(share_learn), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
+        </div>
+      <% end %> 
+    </p>
+  </div>
+<% end %>
+
+ 
+
+<br>
+<h4>
+  
+  <%= link_to '新增分享', new_share_learn_path %>|
+ 
+  <%= link_to '返回', share_learns_path %>
+</h4>

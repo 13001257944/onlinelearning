@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181016101503) do
+ActiveRecord::Schema.define(version: 20181016123005) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -136,6 +136,14 @@ ActiveRecord::Schema.define(version: 20181016101503) do
     t.datetime "registration_date"
     t.index ["course_id"], name: "index_registrations_on_course_id"
     t.index ["user_id"], name: "index_registrations_on_user_id"
+  end
+
+  create_table "share_learns", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "title"
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "studenthomeworks", force: :cascade do |t|
