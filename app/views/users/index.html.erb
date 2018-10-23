@@ -12,7 +12,7 @@
       <br>
       <div class="tab-content">
         <div id="home" class="tab-pane fade in active "> 
-          <h2>個人</h2>
+          <h2>個人資料</h2>
           <div class="container">
             <div class="row">
               <div class="col-md-10 col-md-offset-1">
@@ -351,11 +351,20 @@
                       <% end %>
                     <% end %>               
                   <% end %>
-
-                  <%  c1 = (b1.to_f / (a1*course_peoplecount))*100 
-                      f1 = (e1.to_f / (d1*course_peoplecount))*100 
-                      g1 = (((b1+e1).to_f)/(a1*course_peoplecount+d1*course_peoplecount))*100
+                  
+                  <% a_1 = a1*course_peoplecount
+                    if a_1 ==0
+                      a_1=1
+                    end
+                    d_1 = d1*course_peoplecount
+                    if d_1 == 0
+                      d_1=1
+                    end%>
+                  <%  c1 = (b1.to_f / a_1 )*100
+                      f1 = (e1.to_f / d_1 )*100
+                      g1 = (((b1+e1).to_f)/(a_1+d_1))*100
                   %>
+                  
                   <% inx1 =inx1 + 1%>
                   
                   <tr>

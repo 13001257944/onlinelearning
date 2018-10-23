@@ -235,7 +235,7 @@
       <a class="item" href="/share_learns">學習分享</a>
       <% if current_user %>
         <div class="item">
-          Hi, <%= current_user.sex %>
+          Hi, <%= current_user.name %>
         </div>
         <div class="item">
           <%= link_to('登出', destroy_user_session_path, method: :delete ,:class=>"ui primary button") %> 

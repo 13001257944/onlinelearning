@@ -11,7 +11,8 @@ class NotesController < ApplicationController
       @note = @coursetextbook.notes.build(note_params)
       @note.user = current_user
       @note.save!
-      # redirect_to course_coursetextbook_path(@course,@coursetextbook)
+      redirect_to course_coursetextbook_path(@course,@coursetextbook)
+
   end
   def destroy
     @course = Course.find(params[:course_id])
