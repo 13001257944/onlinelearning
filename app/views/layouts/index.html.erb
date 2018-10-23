@@ -151,6 +151,13 @@
             })
           ;
       });
+
+      $(function(){
+          $('#backtop').click(function(){ 
+            $('html,body').animate({scrollTop:750}, 333);
+          });
+          
+        });
     </script>
   </head>
 
@@ -255,7 +262,7 @@
             Imagine-Your-World.
           </h1>
           <h2>Do whatever it takes.拼盡全力</h2>
-          <a class="ui huge primary button" href = "/courses">Get Started <i class="right arrow icon"></i></a>
+          <button class="ui huge primary button" id="backtop" >Get Started <i class="right arrow icon"></i></button>
         </div>
       </div>   
       <div class="ui vertical stripe segment container">

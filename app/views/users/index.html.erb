@@ -106,17 +106,19 @@
                     <%b1,e1,c1,f1,g1 = [0,0,0,0,0,0,0,0] %>              
                     <% a,b,c,d,e,f,g,h,i = [0,0,0,0,0,0,0,0,0] %>              
                     <% course.coursetextbooks.each do |coursetextbook| %> 
-                      <% a = a+1 %>
-                      <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %> 
+                      <% if coursetextbook.status == "公開"%>
+                        <% a = a+1 %>
+                        <% coursetextbook.finishcoursetextbooks.each do |finishcoursetextbook| %> 
                         <% b1 = b1+1%> 
                         <% if finishcoursetextbook.user_id == current_user.id%> 
                           <% b = b+1%>  
                         <% end %>               
-                      <% end %> 
-                      <% coursetextbook.comments.each do |comment| %>
+                        <% end %> 
+                        <% coursetextbook.comments.each do |comment| %>
                         <% i = i+1%>
                         <% if comment.user_id == current_user.id%> 
                           <% h = h+1%>
+                        <% end %>
                         <% end %>
                       <% end %>
                     <% end %>

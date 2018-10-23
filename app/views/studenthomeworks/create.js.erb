@@ -2,3 +2,4 @@ var studenthomework = document.createElement("div");
 studenthomework.id = "studenthomework-<%= @studenthomework.id %>";
 studenthomework.innerHTML = "<%= j render(:partial => "shared/studenthomework",  locals: {studenthomework: @studenthomework}) %>";
 $("#studenthomeworklist").append(studenthomework);
+$("#homework_form").remove();

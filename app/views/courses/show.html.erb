@@ -90,6 +90,6 @@
   <%= link_to '編輯課程', edit_course_path(@course) %> |
   <%= link_to '進入課程教材', course_coursetextbooks_path(@course) %>
 <% end %>
-<%= link_to '返回', courses_path %>
+<%= link_to '返回', request.referer.present? ? request.referer : default_path  %>
 
 

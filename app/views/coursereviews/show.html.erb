@@ -69,7 +69,7 @@
           <%= coursereview_agree(@coursereview.system_friend_relationship) %>
           <h4 class="mb-3">6.整體而言,對於使用此系統的經驗是感到滿意的</h4>
           <%= coursereview_agree(@coursereview.system_overall) %>
-          <h3><%= link_to '返回', course_coursetextbooks_path %></h3>
+          <h3><%= link_to '返回', request.referer.present? ? request.referer : default_path  %></h3>
         </div>
 
         

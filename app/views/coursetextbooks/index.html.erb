@@ -42,7 +42,13 @@
 <% @course.homeworks.each do |homework| %>
     <% z=z+1 %>
     <div class="ui clearing segment">
-      <p>Lesson <%=z%> : <%= link_to homework.name, course_homework_path(@course,homework)  %></p>
+      <p>Lesson <%=z%> : <%= link_to homework.name, course_homework_path(@course,homework)  %>
+        <% homework.studenthomeworks.each do |studenthomework| %>
+          <% if studenthomework.user_id ==  current_user.id %>
+            <img src="https://www.dancealong.com.au/wp-content/themes/babykids/img/login.png" width="30" height="30">
+          <% end %>
+        <% end %>
+      </p>
       <% if current_user.id == @course.user_id %>
          <div class=" ui right floated buttons">
             <td><%= link_to '編輯作業', edit_course_homework_path(@course,homework), :class => "ui red basic button" %></td>

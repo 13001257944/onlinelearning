@@ -126,7 +126,7 @@
         }
       }
       @media (max-width: 800px) {
-          iframe[src *= "youtube"]{
+          iframe{
               max-width:400px;
               height: 210px;
           }
@@ -135,6 +135,7 @@
   </head>
 
   <body>
+    
     <div class="ui large top fixed menu transition hidden">
       <div class="ui container">
         <!-- <a class="navbar-brand" href="/courses">程式教學平台</a> -->
@@ -233,6 +234,8 @@
         </div>        
       </div>
       <div class="ui vertical stripe segment container">
+        <p class="notice"><%= notice %></p>
+        <p class="alert"><%= alert %></p>
         <%= yield %>
       </div>  
     </div>
