@@ -10,8 +10,8 @@
     <p>分享 <%=inx%> : <%= link_to share_learn.title, share_learn_path(share_learn)  %>
       <% if current_user.id == share_learn.user_id %>
         <div class=" ui right floated buttons">
-           <td><%= link_to '編輯教材', edit_share_learn_path(share_learn), :class => "ui red basic button" %></td>
-           <td><%= link_to "刪除教材", share_learn_path(share_learn), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
+           <td><%= link_to '編輯分享', edit_share_learn_path(share_learn), :class => "ui red basic button" %></td>
+           <td><%= link_to "刪除分享", share_learn_path(share_learn), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
         </div>
       <% end %> 
     </p>

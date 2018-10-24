@@ -218,9 +218,6 @@
                 <div class="item">
                    <%= link_to('個人學習', users_path, :class=>"ui inverted button") %>
                 </div>
-                <!-- <div class="item">
-                   <%= link_to 'Profile', user_path(current_user), :class=>"ui inverted button" %>
-                </div> -->
               <% else %>
                 <div class="item">
                   <%= link_to('註冊', new_user_registration_path, :class=>"ui inverted button") %>
@@ -234,8 +231,6 @@
         </div>        
       </div>
       <div class="ui vertical stripe segment container">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
         <%= yield %>
       </div>  
     </div>
