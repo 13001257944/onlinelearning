@@ -5,7 +5,7 @@
       <div class="page-header">
          <div class="col-md-3 col-sm-4">
           <div class="text-center">
-            <%= image_tag @course.photo, class: "img-responsive img-rounded" %>
+            <%= image_tag @course.photo.url, class: "img-responsive img-rounded" , width: '300px', height:'200px' if @course.photo?%>
           </div>
         </div>
          <div class="col-md-9 col-sm-8">
@@ -69,6 +69,8 @@
           <%= coursereview_agree(@coursereview.system_friend_relationship) %>
           <h4 class="mb-3">6.整體而言,對於使用此系統的經驗是感到滿意的</h4>
           <%= coursereview_agree(@coursereview.system_overall) %>
+        <h3>心得</h3>
+          <%= @coursereview.review %>
           <h3><%= link_to '返回', request.referer.present? ? request.referer : default_path  %></h3>
         </div>
 
