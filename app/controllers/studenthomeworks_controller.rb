@@ -19,6 +19,7 @@ class StudenthomeworksController < ApplicationController
     @course = Course.find(params[:course_id])
     if current_user.id == @studenthomework.user_id
       @studenthomework.destroy
+      redirect_back(fallback_location: root_path)
     end
   end
 
