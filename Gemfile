@@ -33,7 +33,7 @@ gem 'kaminari'
 gem 'popper_js', '~> 1.9', '>= 1.9.9'
 gem 'd3_rails'
 gem 'c3-rails'
-
+gem "fog-aws"
 
 gem 'bootstrap-sass', '~> 3.3.7'
 gem 'jquery-rails'
