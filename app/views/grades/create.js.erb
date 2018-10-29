@@ -1,0 +1,4 @@
+var grade = document.createElement("div");
+grade.id = "grade-<%= @grade.id %>";
+grade.innerHTML = "<%= j render(:partial => "shared/grade",  locals: {grade: grade}) %>";
+$("#commentlist").append(grade);

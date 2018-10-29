@@ -1,0 +1,14 @@
+<div class="comment">
+  <div class="content">
+    <br>
+    <a class="author">老師評語</a>
+    <div class="text">
+      <%= grade.score %>
+    </div>
+  </div>
+</div>
+ <% if current_user.id == @course.user_id %>
+  <div class="actions">
+    <%= link_to "刪除評論",course_homework_studenthomework_grade_path(@course,@homework,studenthomework, grade) ,method: :delete ,  data: { confirm: 'Are you sure?' } %>
+  </div>
+<% end %>

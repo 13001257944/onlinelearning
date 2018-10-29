@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181016123005) do
+ActiveRecord::Schema.define(version: 20181029203050) do
 
   create_table "ckeditor_assets", force: :cascade do |t|
     t.string "data_file_name", null: false
@@ -104,6 +104,13 @@ ActiveRecord::Schema.define(version: 20181016123005) do
   create_table "finishcoursetextbooks", force: :cascade do |t|
     t.integer "user_id"
     t.integer "coursetextbook_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.text "score"
+    t.integer "studenthomework_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

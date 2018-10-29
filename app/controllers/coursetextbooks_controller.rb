@@ -50,7 +50,7 @@ class CoursetextbooksController < ApplicationController
   def finish
     @coursetextbook = Coursetextbook.find(params[:id])
     @coursetextbook.finishcoursetextbooks.create!(user: current_user)
-    redirect_back(fallback_location: root_path)  # 導回上一頁
+    redirect_to course_coursetextbooks_url  # 導回上一頁
   end
 
   def notfinish

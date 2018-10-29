@@ -1,6 +1,7 @@
 class Studenthomework < ApplicationRecord
   belongs_to :user
   belongs_to :homework
+  has_many :grades
 
   has_many :favorites, dependent: :destroy
   has_many :favorited_users, through: :favorites, source: :user

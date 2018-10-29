@@ -140,8 +140,7 @@
       <div class="ui container">
         <!-- <a class="navbar-brand" href="/courses">程式教學平台</a> -->
         <%= link_to('程式教學平台', "courses#index", method: :delete ,:class=>"navbar-brand") %> 
-        <a class="active item">課程瀏覽</a>
-        <a class="item">起源</a>
+        <a class="active item" href="/courses">課程瀏覽</a>
         <a class="item" href="/share_learns">學習分享</a>
         <div class="right menu">
           <% if current_user %>
@@ -172,8 +171,7 @@
     <!-- Sidebar Menu -->
     <div class="ui left vertical inverted sidebar menu ">
       <a class="navbar-brand" href="/courses">程式教學平台</a>
-      <a class="active item">課程瀏覽</a>
-      <a class="item">起源</a>   
+      <a class="active item" href="/courses">課程瀏覽</a>
       <a class="item" href="/share_learns">學習分享</a>
       <% if current_user %>
         <div class="item">
@@ -204,8 +202,7 @@
               <i class="sidebar icon"></i>
             </a>
             <a class="header item" href="/courses">程式教學平台</a>
-            <a class="active item">課程瀏覽</a>
-            <a class="item" >起源</a>
+            <a class="active item" href="/courses">課程瀏覽</a>
             <a class="item" href="/share_learns">學習分享</a>
             <div class="right item">
               <% if current_user %>

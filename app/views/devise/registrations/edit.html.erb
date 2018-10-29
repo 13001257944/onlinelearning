@@ -70,7 +70,7 @@
                 <div class="row">
                   <div class="col-md-5 mb-3">
                     <label for="sex">性別</label>
-                    <%= f.select :sex,options_for_select([["男生",1],["女生",0],["其他",2]],1),:class=>"custom-select d-block w-100" %>
+                    <%= f.select :sex,options_for_select([["男生",1],["女生",0],["其他",2]],selected: @user.sex),:class=>"custom-select d-block w-100" %>
                     <div class="invalid-feedback">
                       Please select a valid sex.
                     </div>

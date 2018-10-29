@@ -7,6 +7,8 @@ class HomeworksController < ApplicationController
     if current_user.id == @course.user_id
       @homeworks = Homework.all
       @studenthomeworks = Studenthomework.all
+      @grades = Grade.all
+
     end
   end
 
@@ -29,6 +31,7 @@ class HomeworksController < ApplicationController
 
   def show
       @studenthomework = Studenthomework.new
+      @grade = Grade.new
   end
 
   def edit

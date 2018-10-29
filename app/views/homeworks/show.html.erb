@@ -45,12 +45,23 @@
                     <div class="text">
                       <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
                       <%= studenthomework.description %>
+                      <% studenthomework.grades.each do |grade| %>
+                       <div class="comment">
+                        <div class="content">
+                            <br>
+                            <a class="author">老師評語</a>
+                            <div class="text">
+                              <%= grade.score %>
+                            </div>
+                        </div>
+                       </div>
+                      <% end %>
                     </div>
                   </div>
                 </div>
                 
                 <div class="actions">
-                  <%= link_to "Delete", course_homework_studenthomework_path(@course,@homework, studenthomework) ,method: :delete , data: { confirm: 'Are you sure?' }, :remote => true %>
+                  <%= link_to "刪除作業", course_homework_studenthomework_path(@course,@homework, studenthomework) ,method: :delete , data: { confirm: 'Are you sure?' }, :remote => true %>
                 </div>
                 <hr>
               <% else %>
@@ -64,6 +75,15 @@
                       <div class="text">
                         <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
                         <%= studenthomework.description %>
+                        <div id="commentlist">
+                          <% count_sh1 = 0%>
+                          <% studenthomework.grades.each do |grade| %>
+                              <% count_sh1 +=1%>     
+                              <div id="grade-<%= grade.id %>">
+                                <%= render partial: "shared/grade", locals: {studenthomework: studenthomework ,grade: grade} %>
+                              </div>
+                          <% end %>
+                        </div>
                         <%= render partial: "shared/favorite", locals: {studenthomework: studenthomework} %>
 
                       </div>
@@ -86,8 +106,28 @@
               <div class="text">
                 <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
                 <%= studenthomework.description %>
-                <%= render partial: "shared/favorite", locals: {studenthomework: studenthomework} %>
-
+                <div id="commentlist">
+                  <% count_sh = 0%>
+                  <% studenthomework.grades.each do |grade| %>
+                      <% count_sh +=1%>     
+                      <div id="grade-<%= grade.id %>">
+                        <%= render partial: "shared/grade", locals: {studenthomework: studenthomework ,grade: grade} %>
+                      </div>
+                  <% end %>
+                </div>
+                <div id = addform>
+                  <% if count_sh==0%>
+                    <%= form_for [@course,@homework,studenthomework,@grade ]  do |f| %>
+                      <div class="form-group">
+                        <%= f.text_area :score, placeholder: "老師評論", class: "form-control" %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.submit "新增評論",class: "btn btn-primary"  %>
+                        <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                </div>
               </div>
 
               <hr>
