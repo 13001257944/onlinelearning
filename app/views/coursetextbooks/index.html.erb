@@ -82,7 +82,7 @@
     <%= link_to '新增單元', new_course_coursetextbook_path %>|
     <%= link_to '新增作業', new_course_homework_path %>|
   <% end -%>
-  <% if count == 0 %>
+  <% if count == 0 && current_user.id != @course.user_id %>
     <%= link_to '新增心得', new_course_coursereview_path %>|
   <% end %>
   <%= link_to '返回', courses_path %>
