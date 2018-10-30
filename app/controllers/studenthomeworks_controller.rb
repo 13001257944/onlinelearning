@@ -17,9 +17,9 @@ class StudenthomeworksController < ApplicationController
   end
   def destroy
     @course = Course.find(params[:course_id])
-    if current_user.id == @studenthomework.user_id
+    if current_user.id == @studenthomework.user_id ||current_user.id == @course.user_id
       @studenthomework.destroy
-      redirect_back(fallback_location: root_path)
+      redirect_to course_homework_path(@course,@homework)
     end
   end
 

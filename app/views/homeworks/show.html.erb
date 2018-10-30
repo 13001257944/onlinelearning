@@ -129,7 +129,9 @@
                   <% end %>
                 </div>
               </div>
-
+              <div class="actions">
+                  <%= link_to "刪除作業", course_homework_studenthomework_path(@course,@homework, studenthomework) ,method: :delete , data: { confirm: 'Are you sure?' }%>
+                </div>
               <hr>
             </div>
           </div>

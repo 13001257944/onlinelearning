@@ -14,7 +14,7 @@ class CommentsController < ApplicationController
   end
   def destroy
     @course = Course.find(params[:course_id])
-    if current_user.id == @comment.user_id
+    if current_user.id == @comment.user_id ||current_user.id == @course.user_id
       @comment.destroy
       #redirect_to course_coursetextbook_path(@course,@coursetextbook)
     end
