@@ -21,11 +21,11 @@
       <h4 class="mb-3">課程狀態</h4>
       <div class="d-block my-3">
         <div class="custom-control custom-radio">
-          <%= form.radio_button :status, "公開" ,:class=>"custom-control-input" ,:required => true %>
+          <%= form.radio_button :status, "公開" ,:checked =>true ,:class=>"custom-control-input" ,:required => true %>
           <%= form.label :status, "公開" %>
         </div>
         <div class="custom-control custom-radio">
-          <%= form.radio_button :status, "不公開" ,:class=>"custom-control-input" ,:required => true %>
+          <%= form.radio_button :status, "不公開" ,:checked =>false ,:class=>"custom-control-input" ,:required => true %>
           <%= form.label :status, "不公開" %>
         </div>
       </div>
