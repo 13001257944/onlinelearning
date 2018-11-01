@@ -10,9 +10,7 @@
         </div>
          <div class="col-md-9 col-sm-8">
           <h2><%= @user.name %></h2>
-          <p><strong><%= @user.email %></strong></p>
-<!--           <div><%= simple_format @user.intro %></div>
- -->          
+          <p><strong><%= @user.email %></strong></p>       
           <div>
             <label for="sex">性別:<%= user_gender(@user.sex)  %></label>
           </div>
@@ -36,22 +34,18 @@
        <br>
        <div class="row">
         <div class="col-md-8 order-md-1">
-          <h3 class="mb-3">基本資料</h4>
-          
+          <h3 class="mb-3">基本資料</h4>          
           <div class="mb-3">
             <h4 for="intro">自我介紹</h4>
             <div><%= @user.intro %></div> 
           </div>
-          <br>
-          
-
+          <br>          
           <h4 class="mb-3">是否曾經接觸過程式語言</h4>
           <%if  @user.programming == "programming_yes" %>
             <div>是</div>
           <% else %>
             <div>否</div>
           <% end %>
-
           <h4 class="mb-3">是否曾經接觸過Ruby on Rails</h4>
           <%if  @user.ror == "ror_yes" %>
             <div>是</div>

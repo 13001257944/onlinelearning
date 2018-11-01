@@ -2,37 +2,6 @@
 
 <h1>作業分享</h1>
 <br>
-
-<!-- <tr>
-  <th>課程單元</th>
-  <th colspan="3"></th>
-</tr> -->
-
-
-<!-- <div class="ui comments">
-  <div>
-    <div id="studenthomeworklist">
-      <% @course.homeworks.each do |homework| %>
-        <% homework.studenthomeworks.each do |studenthomework| %>   
-          <div id="studenthomework-<%= studenthomework.id %>">
-            <div class="comment">
-              <div class="content">
-                <a class="author"><%= studenthomework.user.name %></a>
-                <div class="metadata">
-                  <span class="date"><%= studenthomework.created_at %></span>
-                </div>
-                <div class="text">
-                  <%= link_to studenthomework.file_identifier, studenthomework.file_url if studenthomework.file? %>
-                  <%= studenthomework.description %>
-                </div>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</div> -->
 <table class="ui celled structured table">
   <thead>
     <tr>
@@ -82,9 +51,6 @@
     <% end %>    
   </tbody>
 </table>
-
-
-
 <br>
 
 <h4><%= link_to '返回', course_coursetextbooks_path %></h4>  

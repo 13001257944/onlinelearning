@@ -83,7 +83,6 @@
   
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">課程內容</a></li>
-    <!-- <li><a data-toggle="tab" href="#menu1">個人筆記</a></li> -->
     <li><a data-toggle="tab" href="#menu2">同學筆記</a></li>
   </ul>
 
@@ -100,8 +99,6 @@
             寫筆記
           </div>
         </p>
-        
-        
         
         <p>
           <strong>Teacher</strong>
@@ -166,62 +163,6 @@
         </div>
       </div>  
     </div>
-          
-   <!--  <div id="menu1" class="tab-pane fade left">
-      <div class="form container">
-        <h3 class="ui dividing header">課堂筆記</h3>
-        <div>
-          <div class="notelist">
-            <% count=0 %>
-            <% @coursetextbook.notes.each do |note| %> 
-              <% if note.user_id == current_user.id && note.coursetextbook_id== @coursetextbook.id%>    
-                <% count = count+1 %>
-                <div id="note-<%= note.id %>-2">
-                  <%= render partial: "shared/note", locals: {note: note} %>
-                </div>
-              <% end %>
-             <% end %>
-          </div>
-        </div>
-        <br>
-        <br>
-        <%if count == 0%>
-          <div class="container notecreate">
-            <div class="row">
-              <div class="note" >
-                <%= form_for [@course,@coursetextbook, @note], { remote: true }  do |f| %>
-                  
-                  <div class="form-group">
-                    <h4 class="mb-3">筆記狀態</h4>
-                    <div class="d-block my-3">
-                      <div class="custom-control custom-radio">
-                        <%= f.radio_button :status, "公開" ,:class=>"custom-control-input",:checked =>true ,:required => true %>
-                        <%= f.label :status, "公開" %>
-                      </div>
-                      <div class="custom-control custom-radio">
-                        <%= f.radio_button :status, "不公開" ,:class=>"custom-control-input",:checked =>false ,:required => true %>
-                        <%= f.label :status, "不公開" %>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="form-group" >
-                    筆記內容:<br><%= f.cktext_area :content, placeholder: '筆記內容',:class =>'form-control' %>
-                  </div>
-
-                  
-                  <div class="form-group">
-                    <%= f.submit class: "btn btn-primary" %>
-                    <%= f.button "Cancel", type: :reset, class: "btn btn-default" %>
-                  </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        <% end %>
-      </div>
-    </div> -->
-   
-
     <div id="menu2" class="tab-pane fade right">
       <div class="container">
         <table class="ui celled padded table">
@@ -243,7 +184,7 @@
                     <%= note.created_at %>
                   </td>
                   <td>
-                    <%= truncate(note.content, length: 15) %>...<%= link_to "繼續閱讀" ,course_coursetextbook_note_path(@course,@coursetextbook,note)%>
+                    <%= note.content.first(11) %>...<%=link_to "繼續閱讀",course_coursetextbook_note_path(@course,@coursetextbook,note)%>
                     
                   </td>                      
                 </tr>
@@ -253,8 +194,5 @@
         </table>
       </div>
     </div>
-
-  </div>
-
-  
+  </div> 
 </body>

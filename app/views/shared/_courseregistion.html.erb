@@ -13,7 +13,5 @@
 <% else %> 
   <td><%= link_to '課程簡介', course_path(course) , :class => 'ui inverted brown button' %></td> 
   <td><%= link_to '註冊',courseregistion_course_path(course), method: :post ,  :class => 'yellow ui button' , data: { confirm: '確定要註冊？' }%></td>    
-
-  
 <% end %>
 

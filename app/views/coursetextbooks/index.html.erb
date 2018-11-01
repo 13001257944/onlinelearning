@@ -1,7 +1,5 @@
 <p id="notice"><%= notice %></p>
-
 <h1>課程單元</h1>
-
 <% i=0 %>
 <% inx=0 %>
 <% @course.coursetextbooks.each do |coursetextbook| %>
@@ -16,8 +14,7 @@
         <% end %>
       </p>
     </div>
-  <% end %>
-      
+  <% end %>      
   <% if current_user.id == @course.user_id %>
     <% inx = inx+1 %>
     <div class="ui clearing segment">
@@ -32,8 +29,7 @@
            <td><%= link_to "刪除教材", course_coursetextbook_path(@course, coursetextbook), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
         </div>
       </p>
-    </div>
-    
+    </div>    
   <% end %>  
 <% end %>
 
@@ -55,8 +51,7 @@
             <td><%= link_to "刪除作業", course_homework_path(@course, homework), method: :delete , data: { confirm: 'Are you sure?' }, :class => "ui blue basic button"%></td>
          </div>
        <% end %>
-    </div>
-   
+    </div>   
 <% end %>
 
 <h1>作品分享</h1>
@@ -73,9 +68,6 @@
   <div class="ui clearing segment">
     <p> <%= link_to "課後問卷" ,course_coursereviews_path(@course,@user)  %></p>
   </div>
-  
- 
-
 <br>
 <h4>
   <% if current_user.id == @course.user_id %>
