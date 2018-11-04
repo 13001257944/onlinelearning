@@ -4,14 +4,17 @@
 </p>
 
 <p>
-  <strong>範例檔案</strong>
+  <h1><strong>範例檔案</strong></h1>
   <%= link_to @homework.file_identifier, @homework.file_url if @homework.file? %>
 </p>
 
 <p>
+  題目：
   <%= raw @homework.description %>
+  <p>(可以透過下方程式練習區撰寫程式碼)</p>  
 </p>
-
+<h1 style="font-style: italic;"><span style="background-color:#FFFFE0;">程式練習</span></h1>
+<p><iframe allowfullscreen="true" allowtransparency="true" frameborder="no" height="400px" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals" scrolling="no" src="https://repl.it/@z1z1z1joey/TurbulentGentleGraph?lite=true" width="100%"></iframe></p>
 <br>
 <br>
 <br>
