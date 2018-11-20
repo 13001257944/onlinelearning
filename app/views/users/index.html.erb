@@ -337,9 +337,7 @@
                   <% course.homeworks.each do |homework| %>
                     <% d1 = d1+1%>
                     <% homework.studenthomeworks.each do |studenthomework|%>
-                      <% if studenthomework.user_id == current_user.id%>
-                        <% e1 = e1+1%>
-                      <% end %>
+                      <% e1 = e1+1%>
                     <% end %>               
                   <% end %>
                   
